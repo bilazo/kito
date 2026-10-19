@@ -1,0 +1,27 @@
+{
+  "name": "kito",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @bilazo/kito build && pnpm --filter @bilazo/kito-web dev",
+    "build": "pnpm test && pnpm --filter @bilazo/kito build && pnpm --filter @bilazo/kito-web build",
+    "new": "tsx scripts/new-component.ts",
+    "gen:ai": "tsx scripts/gen-ai-docs.ts",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "format": "pnpm -r format",
+    "format:check": "pnpm -r format:check",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @bilazo/kito test",
+    "check": "pnpm test && pnpm typecheck && pnpm format:check && pnpm lint"
+  },
+  "devDependencies": {
+    "@bilazo/oxc-config": "^1.0.1",
+    "@types/node": "^26.6.4",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3"
+  },
+  "packageManager": "pnpm@12.9.1"
+}

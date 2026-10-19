@@ -1,0 +1,76 @@
+---
+title: Button
+description: A pressable action element.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/button
+  api: https://base-ui.com/react/components/button#api-reference
+---
+
+## Basic
+
+<ComponentPreview name="button/basic" />
+
+## Variants
+
+Seven variants cover the common semantic roles.
+
+<ComponentPreview name="button/variants" />
+
+## Sizes
+
+Text buttons come in three heights; icon buttons come in matching squares.
+
+<ComponentPreview name="button/sizes" />
+
+## With icon
+
+Buttons accept inline SVG icons before or after the label. Non-sized icons
+inherit `size-4` (or `size-5` for `lg`).
+
+<ComponentPreview name="button/with-icon" />
+
+## Loading
+
+While `loading` is `true`, the button is disabled, its label fades out, and a
+spinner appears in its place. The button keeps its width and stays focusable so
+keyboard users are not dropped from the tab order.
+
+<ComponentPreview name="button/loading" />
+
+## Full width
+
+<ComponentPreview name="button/full-width" />
+
+## Disabled
+
+<ComponentPreview name="button/disabled" />
+
+## As link
+
+Button is framework-agnostic. To render a router link, apply the button styles
+with `buttonVariants()` — no coupling to any router:
+
+> **Do not** render a link through Base UI's `render` prop. Base UI deliberately
+> forces `role="button"` on the rendered element, which tells screen readers to
+> announce "button" instead of "link" and breaks native link behavior
+> (Cmd/Ctrl-click, middle-click, right-click "Open in new tab"). Use
+> `buttonVariants()` for links, and reserve `render` for non-link elements.
+
+<ComponentPreview name="button/as-link" />
+
+## RTL
+
+Button uses logical properties (`ps-*`, `ms-*`) internally, so in an RTL
+page the icon positions and text alignment flip automatically. The same
+component renders correctly in both directions with no extra props.
+
+<ComponentPreview name="button/rtl" />
+
+## Props
+
+<PropsTable name="button" />
+
+## Guidelines
+
+<Guidelines name="button" />
