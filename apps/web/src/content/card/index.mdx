@@ -1,0 +1,84 @@
+---
+title: Card
+description: A structural surface for grouping related content.
+category: Components
+---
+
+Compose a card from `CardHeader`, `CardTitle`, `CardDescription`,
+`CardAction`, `CardContent`, and `CardFooter`. Only the parts you need are
+required.
+
+The card's internal padding and gap are driven by a single CSS variable,
+`--card-spacing`, set by `size`. Override it per card with an arbitrary
+property class — `[--card-spacing:--spacing(2)]` — for edge-to-edge content
+or a tighter list.
+
+## Basic
+
+<ComponentPreview name="card/basic" />
+
+## With action
+
+`CardAction` places a small control in the top-end corner of the header. The
+header's grid positions it automatically — no extra layout on your side.
+
+<ComponentPreview name="card/with-action" />
+
+## With footer
+
+The footer has a top border and a muted background so actions sit on their own
+surface.
+
+<ComponentPreview name="card/with-footer" />
+
+## Interactive with a stretched link
+
+Pass `interactive` when the card contains a stretched link. The whole card
+reacts to hover and focus, signaling that the surface itself is clickable.
+
+The pattern: put a real `<a>` in the title and give it
+`after:absolute after:inset-0`. The link expands to cover the card, and the
+card's `:has(a:hover)` state provides the affordance.
+
+<ComponentPreview name="card/interactive-link" />
+
+## Interactive with an independent action
+
+A favorite button next to the stretched link. Give `CardAction` a `z-10` so
+clicks on the action do not navigate.
+
+<ComponentPreview name="card/interactive-with-action" />
+
+## Stat
+
+`CardTitle` renders as `<h3>` by default so screen readers announce the card
+as a titled section. For non-heading titles — a numeric value, a badge — pass
+`render={<div />}`.
+
+<ComponentPreview name="card/stat" />
+
+## Content only
+
+For a small, focused panel you can skip the header and footer and use
+`CardContent` alone.
+
+<ComponentPreview name="card/content-only" />
+
+## Empty state
+
+<ComponentPreview name="card/empty-state" />
+
+## RTL
+
+Cards use logical properties throughout (`ps-*`, `pe-*`, `rounded-s-*`,
+`rounded-e-*`), so the internal layout flips automatically in an RTL page.
+
+<ComponentPreview name="card/rtl" />
+
+## Props
+
+<PropsTable name="card" />
+
+## Guidelines
+
+<Guidelines name="card" />
