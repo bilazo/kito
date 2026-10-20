@@ -1,0 +1,61 @@
+---
+title: Tooltip
+description: A small label that appears on hover or focus of a trigger.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/tooltip
+  api: https://base-ui.com/react/components/tooltip#api-reference
+---
+
+Wrap the app in a `TooltipProvider` **once** — typically in the root layout
+— so all tooltips share the same hover delay. A `Tooltip` renders nothing on
+its own; it wires a `TooltipTrigger` to its `TooltipContent`.
+
+Icon-only triggers must still carry `aria-label` — a tooltip is not a
+substitute for an accessible name.
+
+## Basic
+
+<ComponentPreview name="tooltip/basic" />
+
+## Sides
+
+`side` accepts `top`, `right`, `bottom`, `left`, `inline-start`, and
+`inline-end`. The default is `top`.
+
+<ComponentPreview name="tooltip/sides" />
+
+## With icons
+
+A common use: a toolbar where each icon button shows its keyboard shortcut
+in a tooltip.
+
+<ComponentPreview name="tooltip/with-icons" />
+
+## Without an arrow
+
+Pass `showArrow={false}` for a pill-style tooltip.
+
+<ComponentPreview name="tooltip/no-arrow" />
+
+## Long content
+
+The tooltip wraps at `max-w-xs`. Combine `side` and `align` to keep it clear
+of other UI.
+
+<ComponentPreview name="tooltip/long-content" />
+
+## RTL
+
+Use `inline-start` and `inline-end` to place the tooltip on the reading
+start or end. The tooltip flips with the page direction automatically.
+
+<ComponentPreview name="tooltip/rtl" />
+
+## Props
+
+<PropsTable name="tooltip" />
+
+## Guidelines
+
+<Guidelines name="tooltip" />
