@@ -1,0 +1,48 @@
+---
+title: Direction
+description: Sets the text direction (LTR or RTL) for a subtree.
+category: Components
+links:
+  doc: https://base-ui.com/react/utils/direction-provider
+  api: https://base-ui.com/react/utils/direction-provider#api-reference
+---
+
+Most apps set `<html dir="rtl">` once and never think about direction again —
+every component picks it up from the DOM. `DirectionProvider` is for
+**scoping** RTL to a portion of the page: a preview pane, an embedded widget
+in an RTL host, a docs site that demonstrates both directions side by side,
+or any Base UI popup that portals to `<body>` and would otherwise escape the
+surrounding container's `dir`.
+
+## Scoped direction
+
+Wrap only the part that should flip. Everything outside keeps the page's
+default direction.
+
+Pair with `dir="rtl"` on a DOM wrapper so CSS logical properties flip
+alongside the React context.
+
+<ComponentPreview name="direction/scoped" />
+
+## useDirection
+
+`useDirection` reads the current direction from the nearest provider (or
+the closest `dir` attribute) — useful when a component needs to branch on
+direction for behavior, not just for CSS.
+
+<ComponentPreview name="direction/use-direction" />
+
+## RTL
+
+A Persian example showing the direction context active inside an RTL
+subtree.
+
+<ComponentPreview name="direction/rtl" />
+
+## Props
+
+<PropsTable name="direction" />
+
+## Guidelines
+
+<Guidelines name="direction" />
