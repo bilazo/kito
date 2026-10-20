@@ -12,11 +12,17 @@
     "format": "pnpm -r format",
     "format:check": "pnpm -r format:check",
     "typecheck": "pnpm -r typecheck",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish",
+    "changeset:release": "pnpm build && changeset publish",
+    "prepublishOnly": "pnpm build",
     "test": "pnpm --filter @bilazo/kito test",
     "check": "pnpm test && pnpm typecheck && pnpm format:check && pnpm lint"
   },
   "devDependencies": {
     "@bilazo/oxc-config": "^1.0.1",
+    "@changesets/cli": "2.31.1",
     "@types/node": "^26.6.4",
     "oxfmt": "^0.72.0",
     "oxlint": "^1.87.0",

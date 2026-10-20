@@ -1,7 +1,23 @@
 {
   "name": "@bilazo/kito",
   "version": "0.0.0",
-  "private": false,
+  "description": "A React design system built on Base UI and Tailwind CSS v4.",
+  "keywords": [
+    "base-ui",
+    "react",
+    "tailwindcss",
+    "ui"
+  ],
+  "homepage": "https://github.com/bilazo/kito#readme",
+  "bugs": {
+    "url": "https://github.com/bilazo/kito/issues"
+  },
+  "license": "MIT",
+  "author": "bilazo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bilazo/kito.git"
+  },
   "files": [
     "dist",
     "src/styles/defaults.css"
@@ -15,15 +31,18 @@
       "import": "./dist/components/*.mjs"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsdown",
-    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt .",
-    "format:check": "oxfmt --check ."
+    "format:check": "oxfmt --check .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

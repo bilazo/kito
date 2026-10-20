@@ -1,0 +1,402 @@
+@source "../components";
+
+/*
+ * Kito — Design Token Contract
+ *
+ * Layers:
+ * 1. Primitive tokens  → raw color scales + typography
+ * 2. Semantic tokens   → what components consume
+ * 3. Component tokens  → radius + control sizes
+ *
+ * Rule:
+ * Components must consume semantic tokens only.
+ * They should not use primitive color scales directly.
+ * Components should not use dark: for theme colors.
+ * Dark mode is handled by semantic token swapping.
+ */
+
+/* -------------------------------------------------------------------------- */
+/* 1. PRIMITIVES                                                              */
+/* -------------------------------------------------------------------------- */
+
+@theme {
+  /*
+   * Keep Tailwind's generated theme intentionally closed.
+   * Kito defines its own design language.
+   */
+  --color-*: initial;
+  --text-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+
+  --color-white: #fff;
+  --color-black: #000;
+
+  /*
+   * Font
+   *
+   * This is a package default.
+   * Applications can override --font-sans without changing components.
+   */
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+
+  /* ---------------------------------------------------------------------- */
+  /* Brand                                                                  */
+  /* ---------------------------------------------------------------------- */
+
+  --color-brand-50: oklch(0.975 0.023 149.2);
+  --color-brand-100: oklch(0.95 0.046 149.2);
+  --color-brand-200: oklch(0.9 0.095 149.2);
+  --color-brand-300: oklch(0.83 0.179 149.2);
+  --color-brand-400: oklch(0.75 0.195 149.2);
+  --color-brand-500: oklch(0.661 0.179 149.2);
+  --color-brand-600: oklch(0.507 0.141 149.2);
+  --color-brand-700: oklch(0.432 0.119 149.2);
+  --color-brand-800: oklch(0.367 0.101 149.2);
+  --color-brand-900: oklch(0.302 0.085 149.2);
+  --color-brand-950: oklch(0.252 0.074 149.2);
+
+  /* ---------------------------------------------------------------------- */
+  /* Highlight                                                              */
+  /* ---------------------------------------------------------------------- */
+
+  --color-highlight-50: oklch(0.98 0.012 109.6);
+  --color-highlight-100: oklch(0.955 0.022 109.6);
+  --color-highlight-200: oklch(0.91 0.04 109.6);
+  --color-highlight-300: oklch(0.87 0.058 109.6);
+  --color-highlight-400: oklch(0.822 0.085 109.6);
+  --color-highlight-500: oklch(0.77 0.095 109.6);
+  --color-highlight-600: oklch(0.68 0.092 109.6);
+  --color-highlight-700: oklch(0.56 0.082 109.6);
+  --color-highlight-800: oklch(0.47 0.068 109.6);
+  --color-highlight-900: oklch(0.39 0.055 109.6);
+  --color-highlight-950: oklch(0.27 0.04 109.6);
+
+  /* ---------------------------------------------------------------------- */
+  /* Neutral                                                                */
+  /* ---------------------------------------------------------------------- */
+
+  --color-neutral-50: oklch(0.985 0.002 286.1);
+  --color-neutral-100: oklch(0.965 0.0033 286.1);
+  --color-neutral-200: oklch(0.925 0.0047 286.1);
+  --color-neutral-300: oklch(0.87 0.006 286.1);
+  --color-neutral-400: oklch(0.66 0.008 286.1);
+  --color-neutral-500: oklch(0.54 0.0087 286.1);
+  --color-neutral-600: oklch(0.469 0.008 286.1);
+  --color-neutral-700: oklch(0.37 0.0073 286.1);
+  --color-neutral-800: oklch(0.27 0.006 286.1);
+  --color-neutral-900: oklch(0.21 0.0053 286.1);
+  --color-neutral-950: oklch(0.15 0.0047 286.1);
+
+  /* ---------------------------------------------------------------------- */
+  /* Typography                                                             */
+  /* ---------------------------------------------------------------------- */
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.25rem;
+
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5rem;
+
+  --text-base: 1rem;
+  --text-base--line-height: 1.75rem;
+
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.875rem;
+
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 2rem;
+
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2.25rem;
+
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.5rem;
+
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 3rem;
+
+  /* ---------------------------------------------------------------------- */
+  /* Animations                                                             */
+  /* ---------------------------------------------------------------------- */
+
+  /* Linear progress indeterminate — a segment slides from start to end. */
+  --animate-progress-indeterminate: progress-indeterminate 1.5s ease-in-out infinite;
+
+  @keyframes progress-indeterminate {
+    0% {
+      inset-inline-start: -40%;
+    }
+    100% {
+      inset-inline-start: 100%;
+    }
+  }
+
+  /* Shimmer — a highlight that sweeps left to right across a placeholder. */
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. COMPONENT TOKENS                                                       */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  /*
+   * Single source of truth for component roundness.
+   *
+   * Change this one value to rebrand the whole UI's visual roundness.
+   */
+  --radius: 0.625rem;
+
+  /*
+   * Control heights.
+   *
+   * sm = compact controls
+   * md = default controls
+   * lg = large controls
+   */
+  --control-sm: 2rem;
+  --control-md: 2.5rem;
+  --control-lg: 3rem;
+}
+
+/*
+ * Increase interactive targets on touch devices.
+ */
+@media (pointer: coarse) {
+  :root {
+    --control-sm: 2.25rem;
+    --control-md: 2.75rem;
+    --control-lg: 3.25rem;
+  }
+}
+
+@theme inline {
+  --radius-*: initial;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. SEMANTIC TOKENS                                                        */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --background: var(--color-neutral-50);
+  --foreground: var(--color-neutral-900);
+
+  --card: var(--color-white);
+  --card-foreground: var(--color-neutral-900);
+
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-neutral-900);
+
+  --muted: var(--color-neutral-100);
+  --muted-foreground: var(--color-neutral-500);
+
+  /* Lines */
+  --border: var(--color-neutral-200);
+  --input: var(--color-neutral-400);
+  --ring: var(--color-brand-600);
+
+  /* Primary */
+  --primary: var(--color-brand-600);
+  --primary-hover: var(--color-brand-700);
+  --primary-active: var(--color-brand-800);
+  --primary-foreground: var(--color-white);
+
+  --primary-soft: var(--color-brand-100);
+  --primary-soft-hover: var(--color-brand-200);
+  --primary-soft-foreground: var(--color-brand-800);
+
+  /* Secondary */
+  --secondary: var(--color-neutral-100);
+  --secondary-hover: var(--color-neutral-200);
+  --secondary-active: var(--color-neutral-300);
+  --secondary-foreground: var(--color-neutral-900);
+
+  /* Accent */
+  --accent: var(--color-neutral-100);
+  --accent-active: var(--color-neutral-200);
+  --accent-foreground: var(--color-neutral-900);
+
+  /* Destructive */
+  --destructive: oklch(0.577 0.215 27);
+  --destructive-hover: oklch(0.51 0.19 27);
+  --destructive-active: oklch(0.45 0.165 27);
+  --destructive-foreground: var(--color-white);
+
+  /* Highlight */
+  --highlight: var(--color-highlight-200);
+  --highlight-foreground: var(--color-highlight-900);
+
+  /* Skeleton shimmer highlight */
+  --skeleton-shimmer: rgb(255 255 255 / 0.55);
+}
+
+/* -------------------------------------------------------------------------- */
+/* DARK THEME                                                                */
+/* -------------------------------------------------------------------------- */
+
+.dark {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --background: var(--color-neutral-950);
+  --foreground: var(--color-neutral-50);
+
+  --card: var(--color-neutral-900);
+  --card-foreground: var(--color-neutral-50);
+
+  --popover: var(--color-neutral-900);
+  --popover-foreground: var(--color-neutral-50);
+
+  --muted: var(--color-neutral-800);
+  --muted-foreground: var(--color-neutral-400);
+
+  /* Lines */
+  --border: var(--color-neutral-800);
+  --input: var(--color-neutral-500);
+  --ring: var(--color-brand-400);
+
+  /* Primary */
+  --primary: var(--color-brand-400);
+  --primary-hover: var(--color-brand-300);
+  --primary-active: var(--color-brand-200);
+  --primary-foreground: var(--color-neutral-950);
+
+  --primary-soft: var(--color-brand-900);
+  --primary-soft-hover: var(--color-brand-800);
+  --primary-soft-foreground: var(--color-brand-100);
+
+  /* Secondary */
+  --secondary: var(--color-neutral-800);
+  --secondary-hover: var(--color-neutral-700);
+  --secondary-active: var(--color-neutral-600);
+  --secondary-foreground: var(--color-neutral-50);
+
+  /* Accent */
+  --accent: var(--color-neutral-800);
+  --accent-active: var(--color-neutral-700);
+  --accent-foreground: var(--color-neutral-50);
+
+  /* Destructive */
+  --destructive: oklch(0.7 0.17 25);
+  --destructive-hover: oklch(0.76 0.12 25);
+  --destructive-active: oklch(0.81 0.09 25);
+  --destructive-foreground: var(--color-neutral-950);
+
+  /* Highlight */
+  --highlight: var(--color-highlight-900);
+  --highlight-foreground: var(--color-highlight-200);
+
+  /* Skeleton shimmer highlight */
+  --skeleton-shimmer: rgb(255 255 255 / 0.08);
+}
+
+/* -------------------------------------------------------------------------- */
+/* SEMANTIC → TAILWIND                                                       */
+/* -------------------------------------------------------------------------- */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-soft-hover: var(--primary-soft-hover);
+  --color-primary-soft-foreground: var(--primary-soft-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-active: var(--secondary-active);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-active: var(--accent-active);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-active: var(--destructive-active);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+}
+
+/* -------------------------------------------------------------------------- */
+/* BASE                                                                       */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  *,
+  ::before,
+  ::after,
+  ::backdrop {
+    box-sizing: border-box;
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+  button[data-loading='true']:not(:disabled),
+  [role='button'][data-loading='true']:not(:disabled) {
+    cursor: no-drop;
+  }
+}

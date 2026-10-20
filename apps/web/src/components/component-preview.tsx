@@ -60,7 +60,7 @@ export function ComponentPreview({ name, lang = 'tsx' }: ComponentPreviewProps) 
       {/* Toolbar */}
       <div className="flex items-center justify-end gap-0.5 border-b border-border bg-muted/40 px-2 py-1.5">
         <Button
-          variant={codeOpen ? 'secondary' : 'ghost'}
+          variant={codeOpen ? 'soft' : 'ghost'}
           size="icon-sm"
           aria-label={codeOpen ? 'Hide code' : 'Show code'}
           aria-pressed={codeOpen}
@@ -71,7 +71,7 @@ export function ComponentPreview({ name, lang = 'tsx' }: ComponentPreviewProps) 
 
         {showRtlToggle && (
           <Button
-            variant={isRtl ? 'secondary' : 'ghost'}
+            variant={isRtl ? 'soft' : 'ghost'}
             size="icon-sm"
             aria-label={isRtl ? 'Switch to LTR' : 'Switch to RTL'}
             aria-pressed={isRtl}
@@ -82,7 +82,7 @@ export function ComponentPreview({ name, lang = 'tsx' }: ComponentPreviewProps) 
         )}
 
         <Button
-          variant={dark ? 'secondary' : 'ghost'}
+          variant={dark ? 'soft' : 'ghost'}
           size="icon-sm"
           aria-label={dark ? 'Light preview' : 'Dark preview'}
           aria-pressed={dark}
