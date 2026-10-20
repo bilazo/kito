@@ -3,7 +3,7 @@ import { ArrowRight, Plus } from 'lucide-react'
 
 export default function WithIcon() {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-2">
       <Button>
         <Plus />
         New item

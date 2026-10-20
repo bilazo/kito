@@ -2,7 +2,7 @@ import { Button } from '@bilazo/kito/components/button'
 
 export default function Rtl() {
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-2">
       <Button>ثبت تغییرات</Button>
       <Button variant="secondary">انصراف</Button>
       <Button variant="soft">ذخیره‌ی پیش‌نویس</Button>

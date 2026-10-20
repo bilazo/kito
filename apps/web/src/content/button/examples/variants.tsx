@@ -2,7 +2,7 @@ import { Button } from '@bilazo/kito/components/button'
 
 export default function Variants() {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-2">
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="soft">Soft</Button>

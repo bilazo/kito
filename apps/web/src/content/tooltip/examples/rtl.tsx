@@ -11,7 +11,7 @@ import { Save, Trash2 } from 'lucide-react'
 export default function Rtl() {
   return (
     <TooltipProvider>
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-4">
         <Tooltip>
           <TooltipTrigger render={<Button variant="outline" />}>ذخیره‌ی تغییرات</TooltipTrigger>
           <TooltipContent side="bottom">تغییرات را برای همه اعضا اعمال می‌کند</TooltipContent>

@@ -2,7 +2,7 @@ import { Button } from '@bilazo/kito/components/button'
 
 export default function Loading() {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-2">
       <Button loading>Saving</Button>
       <Button variant="outline" loading>
         Loading
