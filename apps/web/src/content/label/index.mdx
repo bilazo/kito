@@ -1,0 +1,70 @@
+---
+title: Label
+description: An accessible form control label.
+category: Components
+---
+
+## Basic
+
+`Label` renders a plain `<label>`. Use `htmlFor` to associate it with a
+control's `id` — this is what allows clicking the label to focus the control
+and what screen readers use to announce it.
+
+<ComponentPreview name="label/basic" />
+
+## Required
+
+There is no `required` visual built into `Label`. Add a `*` (or any marker)
+as a child. The `required` attribute belongs on the control, not the label.
+
+<ComponentPreview name="label/required" />
+
+## With link
+
+Because `Label` is a plain element, you can compose it freely — a label with
+an inline action ("Forgot password?") sits naturally in a flex row. Style the
+anchor with `buttonVariants({ variant: 'link' })` so the visual matches
+`Button`'s link variant without giving up real anchor semantics.
+
+<ComponentPreview name="label/with-link" />
+
+## Disabled
+
+`Label` reacts to three disabled signals, all wired into its base class list:
+
+- **`data-disabled`** on the label itself
+- **`peer-disabled`** from a preceding sibling control (the control must sit
+  _before_ the label in the DOM and carry `className="peer"`)
+- **`group-data-[disabled=true]`** from a disabled ancestor group
+
+<ComponentPreview name="label/disabled" />
+
+## Peer disabled
+
+A checkbox row where the input disables and dims its label automatically:
+
+<ComponentPreview name="label/peer-disabled" />
+
+## Group disabled
+
+When an entire group is disabled — a `<fieldset disabled>` or a group with
+`data-disabled="true"` — every label inside dims without needing a local
+prop. Useful for step-by-step forms and preview-only sections.
+
+<ComponentPreview name="label/group-disabled" />
+
+## RTL
+
+`Label` has no directional styling of its own — the layout flips
+automatically in an RTL page. The `ms-*` on a required marker and the
+`htmlFor`/`id` association both work in either direction.
+
+<ComponentPreview name="label/rtl" />
+
+## Props
+
+<PropsTable name="label" />
+
+## Guidelines
+
+<Guidelines name="label" />
