@@ -1,0 +1,90 @@
+---
+title: Field
+description: A single form field wired for accessibility — label, control, description, and error.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/field
+  api: https://base-ui.com/react/components/field#api-reference
+---
+
+`Field` provides `role="group"` and a shared context. Inner controls that use
+Base UI's `Field.Control` (our `Input` and `Textarea`) auto-wire to the label
+— no manual `htmlFor`/`id` needed.
+
+## Basic
+
+<ComponentPreview name="field/basic" />
+
+## With description
+
+<ComponentPreview name="field/with-description" />
+
+## With error
+
+Set `invalid` on the field, and `FieldError` becomes visible. The label
+inherits the destructive color automatically.
+
+<ComponentPreview name="field/with-error" />
+
+## Errors array
+
+Pass form-library errors directly. Duplicate messages collapse; two or more
+unique messages render as a bulleted list.
+
+<ComponentPreview name="field/errors-array" />
+
+## Horizontal
+
+For checkboxes, radios, and switches, use `orientation="horizontal"` — the
+label sits beside the control.
+
+<ComponentPreview name="field/horizontal" />
+
+## With content
+
+When a horizontal field has both a label and a description, wrap them in
+`FieldContent`. Without it, they would each take their own row.
+
+<ComponentPreview name="field/with-content" />
+
+## FieldGroup
+
+A stack of fields with a standard `gap-4`.
+
+<ComponentPreview name="field/field-group" />
+
+## FieldSet
+
+A `<fieldset>` for grouping related fields under a shared legend — radio
+groups, checkbox groups, address blocks.
+
+<ComponentPreview name="field/field-set" />
+
+## FieldSeparator
+
+A divider with optional centered text, useful between alternative form paths.
+
+<ComponentPreview name="field/separator" />
+
+## Responsive
+
+`orientation="responsive"` switches between column and row based on the
+container width of the enclosing `FieldGroup`.
+
+<ComponentPreview name="field/responsive" />
+
+## RTL
+
+`Field` uses logical properties throughout (`ms-*`, `text-start`), so the
+label, description, error, and separator all flip with the page direction.
+Auto-wiring between `FieldLabel` and `Field.Control` works the same in RTL.
+
+<ComponentPreview name="field/rtl" />
+
+## Props
+
+<PropsTable name="field" />
+
+## Guidelines
+
+<Guidelines name="field" />
