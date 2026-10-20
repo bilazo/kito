@@ -1,0 +1,65 @@
+---
+title: Input
+description: A single-line text field for forms and inline text entry.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/input
+  api: https://base-ui.com/react/components/input#api-reference
+---
+
+## Basic
+
+<ComponentPreview name="input/basic" />
+
+## Sizes
+
+`sm`, `md`, and `lg` map to the same `--control-*` tokens that `Button` uses,
+so an input and a button placed side-by-side line up without manual sizing.
+
+<ComponentPreview name="input/sizes" />
+
+## Types
+
+`type` drives the input’s text direction: `email`, `url`, `tel`, `password`,
+and `number` fields always render LTR; everything else uses `dir="auto"`.
+
+<ComponentPreview name="input/types" />
+
+## With a label
+
+Pair the input with a `Label` via matching `htmlFor` / `id`. That is the
+minimum for an accessible field.
+
+<ComponentPreview name="input/with-label" />
+
+## Disabled
+
+`disabled` and `readOnly` are forwarded natively. Use `disabled` to block
+edits and remove the field from the tab order; use `readOnly` to keep the
+value selectable and copyable.
+
+<ComponentPreview name="input/disabled" />
+
+## States
+
+Mark an input invalid with `aria-invalid`. When the input is inside a Base UI
+`Field` (coming soon), the field sets `data-invalid` on the input
+automatically; the styling is identical either way.
+
+<ComponentPreview name="input/states" />
+
+## RTL
+
+Inside an RTL page the input follows the reading direction. The `email` and
+`tel` examples below keep their content LTR — that is the auto-direction
+behavior at work, and it is the same in LTR pages.
+
+<ComponentPreview name="input/rtl" />
+
+## Props
+
+<PropsTable name="input" />
+
+## Guidelines
+
+<Guidelines name="input" />
