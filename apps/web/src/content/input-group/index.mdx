@@ -1,0 +1,76 @@
+---
+title: Input Group
+description: A single visually-merged control — an input plus icon, text, or button slots.
+category: Components
+---
+
+## Basic
+
+Put an `InputGroupAddon` before or after the `InputGroupInput`. The group
+provides border, focus ring, and invalid styling for the whole strip — the
+inner input has none of its own.
+
+<ComponentPreview name="input-group/basic" />
+
+## Sizes
+
+The group height comes from the same `--control-*` tokens as `Button`. The
+size is shared with addons and the input through context, so text scales
+consistently.
+
+<ComponentPreview name="input-group/sizes" />
+
+## Prefix and suffix
+
+Addons can hold short text as well as icons — a domain prefix, a currency
+suffix, a unit.
+
+<ComponentPreview name="input-group/prefix-suffix" />
+
+## Password
+
+For a clickable slot (clear, copy, show/hide password), skip the addon and
+put a `Button` (`variant="ghost"` `size="icon-sm"`) directly in the group.
+The `me-1` trims the trailing inset so the button hugs the border.
+
+<ComponentPreview name="input-group/password" />
+
+## Clearable search
+
+Conditionally render the trailing button only when there is something to
+clear — an always-visible clear button on an empty field is noise.
+
+<ComponentPreview name="input-group/clearable" />
+
+## Copy link
+
+<ComponentPreview name="input-group/copy" />
+
+## Types with icons
+
+The text direction defaults from `type` — emails, URLs, and passwords stay
+LTR inside an RTL page (see `Input` for the full rule).
+
+<ComponentPreview name="input-group/types" />
+
+## States
+
+Any inner `disabled` dims the whole group; any inner `aria-invalid` (or the
+`data-invalid` set by a future `Field`) draws the error border.
+
+<ComponentPreview name="input-group/states" />
+
+## RTL
+
+JSX order equals visual order — the first child sits at the reading start
+without a direction-specific prop.
+
+<ComponentPreview name="input-group/rtl" />
+
+## Props
+
+<PropsTable name="input-group" />
+
+## Guidelines
+
+<Guidelines name="input-group" />
