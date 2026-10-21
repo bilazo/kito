@@ -1,0 +1,64 @@
+---
+title: Kbd
+description: Renders a single keyboard key or a short sequence like ⌘K.
+category: Components
+---
+
+Non-interactive — `Kbd` is `pointer-events-none` and non-selectable. It
+carries no interactivity of its own; put it next to the thing it describes
+(a command, a button, a tooltip).
+
+## Basic
+
+`Kbd` renders a `<kbd>` element sized to fit one or two characters and
+grows for longer labels.
+
+<ComponentPreview name="kbd/basic" />
+
+## Group
+
+`KbdGroup` lays out multiple `Kbd` elements in a row with a small gap — the
+standard way to show a chord like `⌘K` or `Ctrl+Shift+P`.
+
+<ComponentPreview name="kbd/group" />
+
+## Inside a Button
+
+A common pattern: a search button that also shows its keyboard shortcut.
+
+Because `Kbd` is `bg-muted` by default and a `Button` already provides its
+own background, pass `className="bg-background"` to lift the key-cap off
+the button surface.
+
+<ComponentPreview name="kbd/in-button" />
+
+## Inside a Tooltip
+
+Inside a `Tooltip`, the popup surface is inverted (`bg-foreground
+text-background`), so a muted Kbd would vanish. `Kbd` detects this context
+via a parent selector and inverts its own colors — no extra classes
+needed.
+
+<ComponentPreview name="kbd/in-tooltip" />
+
+## Inside an InputGroup
+
+Use `InputGroupAddon` with `align="inline-end"` to place a shortcut hint at
+the trailing edge of an input.
+
+<ComponentPreview name="kbd/in-input-group" />
+
+## RTL
+
+`Kbd` and `KbdGroup` use logical layout (`inline-flex`, `gap`), so they
+behave identically in LTR and RTL. The text content is what changes.
+
+<ComponentPreview name="kbd/rtl" />
+
+## Props
+
+<PropsTable name="kbd" />
+
+## Guidelines
+
+<Guidelines name="kbd" />
