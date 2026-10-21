@@ -234,3 +234,18 @@ Examples:
 - Input's `size` → **not required** (has `defaultVariants: { size: 'md' }`).
 - `Badge.children` → **not required** (declared optional per rule).
 - A hypothetical `variant` with no default → **required**.
+
+### `propsNote` — always mention exported helpers
+
+Every value export besides the root component must get one sentence in
+`propsNote`:
+
+- **cva output** (`inputStyles`, `badgeStyles`) — "returns the class string
+  without rendering a `<tag>`".
+- **utility** (`defaultDir`) — one sentence on what it returns and why.
+- **type-only exports** (`SkeletonVariant`, `InputSize`) — a short note that
+  they are exported as type-only for consumers who want to type a variable.
+
+If a component has no helper exports, `propsNote` should still describe the
+underlying Base UI primitive and any behavior that is not obvious from the
+props table (default `aria-hidden`, `data-invalid` handling, `dir` heuristic).

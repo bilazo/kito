@@ -211,3 +211,23 @@ with a verb — it reads more naturally and sidesteps the capital letter:
   read better lowercase. Test output like
   `Drawer > sides > anchors to the bottom edge` reads as a sentence; a
   capital letter inside breaks the flow.
+
+## Ref forwarding
+
+React 19 makes `ref` a regular prop. Components that spread `{...props}` on
+a native element (like `Skeleton` on `<div>`) forward the ref automatically.
+Components built on a Base UI primitive (`Progress`, `Input`, …) inherit the
+primitive's ref handling.
+
+Every component that renders a native element directly MUST have a test
+that verifies ref forwarding:
+
+    test('forwards ref to the underlying div', () => {
+      const ref = createRef<HTMLDivElement>()
+      render(<Skeleton ref={ref} />)
+      expect(ref.current).toBeInstanceOf(HTMLDivElement)
+    })
+
+The test is a regression guard: any future refactor that removes `{...props}`
+from the element (or introduces a wrapper without `ref` forwarding) will
+break this test instead of silently breaking consumer code.
