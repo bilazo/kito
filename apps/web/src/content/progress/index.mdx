@@ -1,0 +1,78 @@
+---
+title: Progress
+description: A linear progress bar for completion and measurable processes.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/progress
+  api: https://base-ui.com/react/components/progress#api-reference
+---
+
+## Basic
+
+Pass `value` between `min` (default `0`) and `max` (default `100`). Base UI
+provides `role="progressbar"` and `aria-valuenow` automatically — always give
+the bar a name via `aria-label` or a `ProgressLabel`.
+
+<ComponentPreview name="progress/basic" />
+
+## With label
+
+`ProgressLabel` and `ProgressValue` must be children of `Progress` so they
+can read its state. When present, `ProgressLabel` becomes the accessible name
+of the bar — no separate `aria-label` needed.
+
+<ComponentPreview name="progress/with-label" />
+
+## Animated
+
+Drive `value` from your own state. For a smooth, time-accurate animation,
+prefer `performance.now()` over a counter so background-tab throttling does
+not distort the rate.
+
+<ComponentPreview name="progress/animated" />
+
+## Sizes
+
+<ComponentPreview name="progress/sizes" />
+
+## Variants
+
+- **`primary`** — a neutral track with a brand fill; use for lesson and
+  course progress.
+- **`highlight`** — a pale `highlight` track with its dark text color as the
+  fill. The `highlight` scale is soft-only by design, so this is the inverted
+  pair rather than a solid fill. Use for streaks and XP.
+
+<ComponentPreview name="progress/variants" />
+
+## Indeterminate
+
+`value={null}` renders the indeterminate state for work of unknown length.
+A segment slides along the track. Users with `prefers-reduced-motion: reduce`
+see a static, semi-transparent bar instead.
+
+<ComponentPreview name="progress/indeterminate" />
+
+## Locale
+
+Digits follow the `locale` prop — pass a BCP 47 tag. The bar fills from the
+reading start (right in RTL); no direction-specific code is required.
+
+<ComponentPreview name="progress/locale" />
+
+## RTL
+
+Inside an RTL page the bar fills from the reading start (right). Combine
+with `locale="fa-IR"` to render Persian digits in the value — the bar and
+the number both follow the reading direction without direction-specific
+code.
+
+<ComponentPreview name="progress/rtl" />
+
+## Props
+
+<PropsTable name="progress" />
+
+## Guidelines
+
+<Guidelines name="progress" />

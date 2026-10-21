@@ -221,3 +221,16 @@ Examples:
 - `exports: ['Separator']` — component only.
 - `exports: ['Input', 'inputStyles', 'defaultDir']` — component + cva output + utility.
 - `exports: ['Badge', 'badgeStyles']` — component + cva output.
+
+### `required` field in `PropMeta`
+
+Set `required: true` only when the prop has no default value and is
+genuinely required at runtime. In practice this is rare — the components
+that make it here all have sensible defaults, and `children?` is always
+optional per `component.md`.
+
+Examples:
+
+- Input's `size` → **not required** (has `defaultVariants: { size: 'md' }`).
+- `Badge.children` → **not required** (declared optional per rule).
+- A hypothetical `variant` with no default → **required**.

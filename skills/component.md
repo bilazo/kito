@@ -254,3 +254,20 @@ Rule: keep the Viewport `pointer-events-auto` when the component is
 This is what makes nested drawers close correctly when clicking the
 backdrop of the topmost one — the outer drawer's viewport would otherwise
 swallow the click before the inner one could react.
+
+## Subcomponents without own props
+
+When a subcomponent (e.g. `ProgressLabel`, `ProgressValue`) has no library-
+specific props — only `className` or a Base UI native override — do not
+create empty `<Name>OwnProps` / `<Name>BaseUiProps` interfaces. Use a single
+`type` alias instead:
+
+    export type ProgressLabelProps = Omit<BaseProgress.Label.Props, 'className'> & {
+      className?: string
+    }
+
+The rule requiring the three-way split applies only to components that
+define at least one own prop. The split is what makes the docs generator
+route each prop to the right tab — with no own prop, there is nothing to
+route, and the doc generator treats `*Props` as **Component** origin, which
+is correct for the base-UI-derived props plus a className override.
