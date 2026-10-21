@@ -4,22 +4,21 @@ export const meta: ComponentMeta = {
   exports: ['Input', 'inputStyles', 'defaultDir'],
 
   summary:
-    'A single-line text input. Picks its own text direction from `type` — email, url, tel, password, and number inputs always render LTR even inside an RTL page; everything else follows the content with `dir="auto"`. Shares the same `--control-*` size tokens as Button, so an input and a button placed side by side line up.',
+    'A single-line text input. Picks its own text direction from `type` — `email`, `url`, `tel`, `password`, and `number` inputs always render LTR even inside an RTL page; everything else uses `dir="auto"` and follows the content. Shares the same `--control-*` size tokens as `Button`, so an input and a button placed side by side line up without manual sizing.',
 
   whenToUse: [
-    'Collect a single line of text — name, email, search query, URL, phone number.',
-    'Inside a `Field` (or with a `Label`) for a labelled form row with a description or error message.',
-    'For short-form text entry that fits on one line — for multi-line text, use `Textarea`.',
-    'As the input slot inside an `InputGroup` when you need leading/trailing icons or buttons.',
+    'Collect a single line of text — a name, an email address, a search query, a URL, a phone number.',
+    'Inside a `Field` (or next to a `Label` with matching `htmlFor` / `id`) for a labelled form row.',
+    'For short-form entry that fits on one line — the browser gives you the right on-screen keyboard and autofill for `email`, `tel`, `url`, and `password` types.',
+    'As the text-input slot inside an `InputGroup` when the field needs a leading/trailing icon or button.',
   ],
 
   whenNotToUse: [
-    'For multi-line text — use `Textarea`. Long content wraps badly on a single line and has no resize handle.',
-    'For choosing from a list of options — use `Select` or `Combobox`. A free-text field that happens to accept the same values loses the keyboard navigation and the option list.',
-    'For a search box with a dropdown of results — use `Combobox`. A raw `Input` with `type="search"` is fine for a submit-then-navigate search, not for suggestion-as-you-type.',
-    'As the only label of a field — every input needs an accessible name (`Label` with `htmlFor`, or `aria-label`). Placeholder text is not a substitute: it disappears on the first keystroke.',
-    'To build a whole form row — pair `Input` with `Label` and (optionally) a description/error slot; do not inline error text as an adjacent `<span>`.',
-    'With `type="file"` when you need a real dropzone or preview — use a dedicated file-upload component (or `InputGroup` around `type="file"` plus a dropzone) instead of the browser’s default file chrome.',
+    'For multi-line text — use `Textarea`. A single-line field scrolls horizontally and has no resize handle.',
+    'To choose from a fixed list of options — use `Select` or `Combobox`. A free-text field loses the option list and the keyboard navigation.',
+    'For a search box with suggestions as the user types — use `Combobox`. A raw `Input` with `type="search"` is fine for a submit-then-navigate search, not for suggestion lists.',
+    'As the only label of a field — every input needs an accessible name (`Label` with `htmlFor`, or `aria-label`). Placeholder text disappears on the first keystroke and is not announced as the field’s name.',
+    'To display formatted or read-only output — use plain text. An input that the user cannot edit but that occupies a full form row looks editable and steals focus.',
   ],
 
   props: [
@@ -35,19 +34,19 @@ export const meta: ComponentMeta = {
       type: 'string',
       default: "'text'",
       description:
-        'Native input type. Also drives `dir`: `email`, `url`, `tel`, `password`, and `number` force `dir="ltr"`, everything else defaults to `dir="auto"`.',
+        'Native input type. Also drives the text direction: `email`, `url`, `tel`, `password`, and `number` force `dir="ltr"`; everything else defaults to `dir="auto"`.',
     },
     {
       name: 'dir',
       type: "'ltr' | 'rtl' | 'auto'",
       description:
-        'Explicit text direction. Overrides the type-based default from `defaultDir(type)`. Use this for the rare field where the type-based heuristic is wrong (e.g. an email field that should follow the page direction).',
+        'Explicit text direction. Overrides the `type`-based default from `defaultDir(type)`. Use this for the rare field where the heuristic is wrong — an email field that should still follow the page direction, for example.',
     },
     {
       name: 'aria-invalid',
       type: 'boolean',
       description:
-        'Marks the input as invalid. Applies the destructive border and the destructive outline on `:focus-visible`. When the input lives inside a `<Field invalid>`, Base UI sets `data-invalid` instead — both selectors are styled, so either works.',
+        'Marks the input as invalid. Applies the destructive border and the destructive outline on `:focus-visible`. Inside a `<Field invalid>`, Base UI sets `data-invalid` on the control instead — both selectors are styled, so either works.',
     },
     {
       name: 'className',
@@ -58,7 +57,7 @@ export const meta: ComponentMeta = {
   ],
 
   propsNote:
-    'Two helpers are also exported. `inputStyles` is a cva output that returns the class string without rendering an `<input>` — use it to style your own control (or `Textarea`, which already consumes it) with the same border, focus, and invalid treatment. `defaultDir(type)` is the small utility that returns `"ltr"` for `email`, `url`, `tel`, `password`, and `number`, and `"auto"` otherwise. The underlying element is Base UI’s `Field.Control` rendered as a native `<input>`, so all native attributes (`id`, `placeholder`, `autoComplete`, `readOnly`, `required`, `aria-*`, `data-*`) are forwarded untouched.',
+    'Two helpers are also exported. `inputStyles` is a cva output that returns the class string without rendering an `<input>` — use it to style your own control (or a future `Textarea`) with the same border, focus, and invalid treatment. `defaultDir(type)` is a small utility that returns `"ltr"` for `email`, `url`, `tel`, `password`, and `number`, and `"auto"` otherwise. The underlying element is Base UI’s `Field.Control` rendered as a native `<input>`, so all native attributes (`id`, `placeholder`, `autoComplete`, `readOnly`, `required`, `disabled`, `aria-*`, `data-*`) are forwarded untouched.',
 
   composition: [
     {
@@ -68,28 +67,22 @@ export const meta: ComponentMeta = {
       code: `import { Input } from '@bilazo/kito/components/input'\nimport { Label } from '@bilazo/kito/components/label'\n\n<div className="flex max-w-xs flex-col gap-2">\n  <Label htmlFor="email">Email</Label>\n  <Input id="email" type="email" placeholder="you@example.com" />\n</div>`,
     },
     {
-      title: 'Invalid state',
-      description:
-        'Set `aria-invalid` directly for standalone use. Inside a `<Field invalid>` Base UI sets `data-invalid` for you — both selectors apply the destructive border.',
-      code: `import { Input } from '@bilazo/kito/components/input'\n\n<Input aria-invalid aria-label="Email" placeholder="you@example.com" />`,
-    },
-    {
       title: 'Sizes share the control scale',
       description:
         '`sm`, `md`, and `lg` map to the same `--control-*` tokens that `Button` uses, so pairing an input with an adjacent button lines them up without manual sizing.',
       code: `import { Input } from '@bilazo/kito/components/input'\n\n<div className="flex max-w-xs flex-col gap-2">\n  <Input size="sm" aria-label="Small" placeholder="Small" />\n  <Input size="md" aria-label="Medium" placeholder="Medium" />\n  <Input size="lg" aria-label="Large" placeholder="Large" />\n</div>`,
     },
     {
-      title: 'Auto-direction from type',
+      title: 'Invalid state',
       description:
-        '`email`, `url`, `tel`, `password`, and `number` fields always render LTR — even inside an RTL page. This keeps addresses and phone numbers readable while the label and the rest of the UI stay in RTL.',
-      code: `import { Input } from '@bilazo/kito/components/input'\n\n<Input type="email" aria-label="Email" placeholder="you@example.com" />\n<Input type="tel" aria-label="Phone" placeholder="+1 555 0100" />`,
+        'Set `aria-invalid` for standalone use. Inside `<Field invalid>` Base UI sets `data-invalid` for you — both selectors apply the destructive border.',
+      code: `import { Input } from '@bilazo/kito/components/input'\n\n<Input aria-invalid aria-label="Email" placeholder="you@example.com" defaultValue="not-an-email" />`,
     },
     {
-      title: 'Search input',
+      title: 'Auto-direction from type',
       description:
-        'Use `type="search"` for a submit-then-navigate search. The WebKit native clear button is suppressed so it doesn’t fight a custom clear affordance.',
-      code: `import { Input } from '@bilazo/kito/components/input'\n\n<Input type="search" aria-label="Search" placeholder="Search components…" />`,
+        '`email`, `url`, `tel`, `password`, and `number` fields always render LTR — even inside an RTL page. This keeps addresses and phone numbers readable while labels and surrounding UI stay in RTL.',
+      code: `import { Input } from '@bilazo/kito/components/input'\n\n<Input type="email" aria-label="Email" placeholder="you@example.com" />\n<Input type="tel" aria-label="Phone" placeholder="+1 555 0100" />`,
     },
   ],
 }

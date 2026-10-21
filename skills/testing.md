@@ -34,7 +34,7 @@ API — that is what Playwright is for.
 
 ## When not to mock
 
-If the code under test is a third-party library (Base UI, Radix), do not mock
+If the code under test is a third-party library (Base UI), do not mock
 its internal behaviour. Assert the integration points only:
 
 - The correct children are rendered.
@@ -76,7 +76,7 @@ expect(screen.getByTestId('icon')).toBeInTheDocument()
 ```
 
 To keep the indicator mounted across states, pass `keepMounted` on the
-Indicator. Oxin UI does not do this by default — the unmounting behaviour
+Indicator. Kito does not do this by default — the unmounting behaviour
 is intentional.
 
 ## Popup content stays in the DOM

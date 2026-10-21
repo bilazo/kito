@@ -238,7 +238,7 @@ function renderComponentDoc(
 
 function renderFullDoc(components: LoadedComponent[]): string {
   const header = [
-    '# Kito UI — Full Documentation',
+    '# Kito — Full Documentation',
     '',
     '> A React design system built on Base UI and Tailwind CSS v4. Framework-agnostic.',
     '',
@@ -292,7 +292,7 @@ function renderPublicIndex(components: LoadedComponent[]): string {
   }
 
   const lines: string[] = [
-    '# Kito UI',
+    '# Kito',
     '',
     '> A React design system built on Base UI and Tailwind CSS v4. Framework-agnostic.',
     '',

@@ -1,0 +1,53 @@
+---
+title: Separator
+description: A thin line used to visually separate groups of content.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/separator
+  api: https://base-ui.com/react/components/separator#api-reference
+---
+
+## Basic
+
+Renders a horizontal line that fills the width of its container.
+
+<ComponentPreview name="separator/basic" />
+
+## Vertical
+
+Inside a flex container, a vertical Separator stretches to fill the height of
+its row.
+
+<ComponentPreview name="separator/vertical" />
+
+## Variants
+
+Three line styles are available: `solid`, `dashed`, and `dotted`.
+
+<ComponentPreview name="separator/variants" />
+
+## Semantic usage
+
+By default the Separator is purely visual and hidden from screen readers
+(`decorative={true}` → `role="none"`). When the boundary carries semantic
+meaning — for example, between two groups of toolbar controls — pass
+`decorative={false}` so assistive technology announces it as a separator.
+
+<ComponentPreview name="separator/semantic" />
+
+## RTL
+
+Inside an RTL page the separator flips with the rest of the layout: a
+vertical line stays vertical, and `mx-1` becomes `me-1` in logical terms.
+Pass `mx-1` as in the LTR semantic example — Tailwind's logical utilities
+handle the flip.
+
+<ComponentPreview name="separator/rtl" />
+
+## Props
+
+<PropsTable name="separator" />
+
+## Guidelines
+
+<Guidelines name="separator" />

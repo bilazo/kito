@@ -1,20 +1,15 @@
 # Examples
 
-Every example under `apps/docs/src/examples/<component>/` must follow these rules.
+Every example under `apps/web/src/content/<component>/examples/` must follow these rules.
 
 ## Use only library components
 
-Examples must use components imported from `@hooshid/oxin-ui/*`. Never use raw
+Examples must use components imported from `@bilazo/kito/components/*`. Never use raw
 HTML elements (`<button>`, `<input>`, `<div>` for interaction, etc.) for
 anything that already has, or will have, a corresponding library component.
 
 If a library component does not exist yet, mark it with a `TODO` comment
 instead of substituting a raw HTML element:
-
-```tsx
-// TODO: replace with <Toolbar> from @hooshid/oxin-ui/toolbar once available
-<div role="toolbar">...</div>
-```
 
 The raw element is only allowed when it is purely structural (spacing, layout)
 and has no semantic or interactive role.
@@ -54,7 +49,7 @@ When an example needs a component that does not exist yet:
 
 # Icons in examples
 
-All example files under `apps/docs/src/examples/**` MUST use `lucide-react`
+All example files under `apps/web/src/content/<component>/examples/**` MUST use `lucide-react`
 for icons. Never hand-write `<svg>` elements in examples.
 
 Reasons:
@@ -112,14 +107,13 @@ stretched link and navigate away.
 
 ## Frontmatter for docs pages
 
-Every `apps/docs/src/content/<name>.mdx` starts with a frontmatter block:
+Every `apps/web/src/content/<name>/index.mdx` starts with a frontmatter block:
 
 ```yaml
 ---
 title: Button
 description: A pressable action element.
-category: Actions
-order: 10
+category: Components
 links:
   doc: https://base-ui.com/react/components/button
   api: https://base-ui.com/react/components/button#api-reference
@@ -132,7 +126,7 @@ links:
 - The MDX body **must not** start with `# Title` — the H1 comes from
   frontmatter via `PageHeader`. Body sections start at `## `.
 - `category` must be one of the values in `CATEGORY_ORDER`
-  (`apps/docs/src/lib/content.ts`). Do not invent categories; if you need
+  (`apps/web/src/lib/content.ts`). Do not invent categories; if you need
   a new one, add it to the array first (its position there is the sidebar
   order).
 - `order` is a sort key inside the category. Use increments of 10
@@ -173,26 +167,6 @@ preview already does all of that — doing it again creates a nested RTL
 context that is harder to reason about and can double-flip certain
 transforms.
 
-```tsx
-// ❌ double RTL
-export default function Rtl() {
-  return (
-    <div dir="rtl">
-      <Button>ثبت</Button>
-    </div>
-  )
-}
-
-// ✅ the preview provides the RTL context
-export default function Rtl() {
-  return (
-    <div className="flex flex-wrap items-center gap-3">
-      <Button>ثبت</Button>
-    </div>
-  )
-}
-```
-
 A `<div>` for _layout_ (flex, gap) is fine. A `<div>` for _direction_ is
 not.
 
@@ -206,3 +180,44 @@ not.
 
 A good RTL example reads like a screenshot of the component used in an
 actual Persian UI, not like a translation of the Basic example.
+
+## Every component needs a meta.ts
+
+Every component folder under `apps/web/src/content/<name>/` MUST contain a
+`meta.ts` exporting `ComponentMeta` from `@/lib/meta`. It is the single
+source of truth for the `<PropsTable>` and `<Guidelines>` sections on the
+docs page, and for the generated `llms.txt` / `llms-full.txt` files.
+
+Rules:
+
+- `summary` — one paragraph, 2–3 sentences, describing what the component
+  IS and its most distinctive behavior. No feature lists (those go in
+  `whenToUse`).
+- `whenToUse` / `whenNotToUse` — at least 3 bullets each. `whenNotToUse`
+  bullets MUST name the alternative ("use `Textarea` instead", not "isn't
+  suitable").
+- `props` — only props with a JSDoc in `<Name>OwnProps` **or** custom
+  behavior worth documenting (e.g. `type` on Input drives `dir`).
+  `className` is optional; include it if the component's example uses it
+  for width or layout.
+- `propsNote` — one sentence per exported helper (`inputStyles`,
+  `badgeStyles`, `defaultDir`, …), plus a note about the underlying Base UI
+  primitive.
+- `composition` — 3–5 copy-paste recipes, each with a realistic use case.
+
+A `meta.ts` with empty `summary`, `whenToUse`, `whenNotToUse`, or
+`composition` fails the review.
+
+### `exports` field
+
+`meta.exports` lists only the **value** exports that consumers can import
+in a regular `import { … } from '…'` statement. Type-only exports
+(`*OwnProps`, `*BaseUiProps`, `*Props`) do **not** belong in `exports` —
+they are not importable as values, and the docs generator emits a value
+import line.
+
+Examples:
+
+- `exports: ['Separator']` — component only.
+- `exports: ['Input', 'inputStyles', 'defaultDir']` — component + cva output + utility.
+- `exports: ['Badge', 'badgeStyles']` — component + cva output.

@@ -1,6 +1,6 @@
 # Code Style
 
-Managed by `oxfmt` (`@hooshid/ox-config/format`). Do not hand-format.
+Managed by `oxfmt` (`@bilazo/oxc-config/format`). Do not hand-format.
 
 ## Quotes
 

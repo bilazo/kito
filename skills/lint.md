@@ -5,7 +5,7 @@
 - `pnpm lint` — lint the whole workspace
 - `pnpm lint:fix` — auto-fix what can be fixed
 - `pnpm format` — format everything
-- `pnpm --filter @hooshid/oxin-ui lint` — one package
+- `pnpm --filter @bilazo/kito lint` — one package
 
 Always run `pnpm lint` before committing. The pre-commit hook is not
 configured yet, so this is manual for now.
@@ -37,7 +37,7 @@ produces false positives. Re-enable once the plugin supports loading from a
 
 Never import router or meta-framework packages inside the library. List:
 `@tanstack/react-router`, `@tanstack/start`, `next`, `react-router`,
-`@remix-run/*`, `wouter`. Oxin UI must run under any React framework.
+`@remix-run/*`, `wouter`. Kito must run under any React framework.
 
 ### File naming
 

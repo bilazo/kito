@@ -10,15 +10,13 @@ Each component exports:
 The docs generator categorizes props by these suffixes.
 Always JSDoc-document own props so the docs table isn't empty.
 
-Rule: Never expose VariantProps<typeof x> in public component prop interfaces. Always declare variant union types explicitly and use satisfies Record<Union, string> inside cva definitions. Reason: cva types include null, which breaks compatibility with primitives (Base UI, Radix) that don't accept null.
+Rule: Never expose VariantProps<typeof x> in public component prop interfaces. Always declare variant union types explicitly and use satisfies Record<Union, string> inside cva definitions. Reason: cva types include null, which breaks compatibility with primitives (Base UI) that don't accept null.
 
 ## JSDoc rules
 
 - Every prop in `<Name>OwnProps` MUST have a JSDoc block.
 - The first line is the description (imperative, present tense).
 - Optional props with defaults MUST include a `@default <value>` tag.
-- The `@default` value is what appears in the docs `Default` column —
-  do not omit it, the docs generator has no other source for it.
 - Because variant unions are declared manually (not derived from `cva`),
   `defaultVariants` in the `cva` call is NOT read by the docs generator.
   Always duplicate the default as `@default` in JSDoc.
@@ -26,7 +24,7 @@ Rule: Never expose VariantProps<typeof x> in public component prop interfaces. A
 ## When to use Base UI `useRender`
 
 Use `useRender` from `@base-ui/react/use-render` for any component that should
-support the `render` prop (polymorphism). This is the standard for all Oxin UI
+support the `render` prop (polymorphism). This is the standard for all Kito
 components, not just Button.
 
 - For native-feeling components (Button, Badge, Card), use
@@ -36,7 +34,7 @@ components, not just Button.
 
 ## Framework-agnostic rule
 
-Oxin UI components must never depend on a specific React meta-framework
+Kito components must never depend on a specific React meta-framework
 (Next.js, TanStack Start, Remix) or router (TanStack Router, React Router).
 
 - Do not import from `@tanstack/react-router`, `next/link`, etc.
@@ -56,22 +54,11 @@ letters only**. No camelCase, no PascalCase, no underscores, no spaces.
 - Component folders: `packages/ui/src/components/<name>/`
 - Component files: `packages/ui/src/components/<name>/<name>.tsx`
 - Test files: `packages/ui/src/components/<name>/<name>.test.tsx`
-- Internal subcomponent files: `packages/ui/src/components/dialog/dialog-content.tsx`
+- Internal subcomponent files: `packages/ui/src/components/<name>/<name>-content.tsx`
 - Type-only files (when split): `packages/ui/src/components/<name>/<name>.types.ts`
-- Docs pages: `apps/docs/src/content/<name>.mdx`
-- Examples folder: `apps/docs/src/examples/<name>/`
-- Example files: `apps/docs/src/examples/<name>/<example-name>.tsx`
-
-### Examples
-
-| Correct                         | Incorrect                      |
-| ------------------------------- | ------------------------------ |
-| `date-picker/date-picker.tsx`   | `DatePicker/DatePicker.tsx`    |
-| `alert-dialog/alert-dialog.tsx` | `alertDialog/alertDialog.tsx`  |
-| `dialog/dialog-content.tsx`     | `dialog/DialogContent.tsx`     |
-| `button/button.test.tsx`        | `button/Button.test.tsx`       |
-| `examples/button/with-icon.tsx` | `examples/button/withIcon.tsx` |
-| `content/date-picker.mdx`       | `content/DatePicker.mdx`       |
+- Docs pages: `apps/web/src/content/<name>/index.mdx`
+- Examples folder: `apps/web/src/content/<name>/examples/`
+- Example files: `apps/web/src/content/<name>/examples/<example-name>.tsx`
 
 ### Multi-word rule
 
@@ -95,7 +82,7 @@ conventions apply:
 - `data-slot` values: kebab-case → `data-slot="date-picker"`
 
 So a file named `date-picker/date-picker.tsx` exports `DatePicker`,
-imported as `@hooshid/oxin-ui/date-picker`.
+imported as `@bilazo/kito/components/date-picker`.
 
 ### Why
 
@@ -104,7 +91,7 @@ imported as `@hooshid/oxin-ui/date-picker`.
   cross-platform surprises.
 - Tools that glob (`tsdown`, `react-docgen`, our `gen-props.ts`) become
   simpler when a single naming scheme is guaranteed.
-- Subpath imports (`@hooshid/oxin-ui/date-picker`) are naturally lowercase,
+- Subpath imports (`@bilazo/kito/components/date-picker`) are naturally lowercase,
   matching npm's preference for kebab-case package entry points.
 
 ## Testing Base UI's Button
@@ -147,13 +134,6 @@ name that exactly matches the folder name:
 - `avatar/avatar.tsx` → `export function Avatar(...)`
 - `date-picker/date-picker.tsx` → `export function DatePicker(...)`
 - `alert-dialog/alert-dialog.tsx` → `export function AlertDialog(...)`
-
-This is enforced by `gen-props.ts` (via the `findComponent` helper): if a
-file does not export a function with the expected PascalCase name, the
-generator will skip it with an error. The convention exists because a
-component file often contains multiple exported subcomponents
-(`AvatarImage`, `AvatarFallback`, `AvatarGroup`), and only the folder-name
-match reliably identifies the root.
 
 ## Props categorization
 
