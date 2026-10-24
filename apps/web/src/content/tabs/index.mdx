@@ -1,0 +1,75 @@
+---
+title: Tabs
+description: A set of layered panels switched by a row (or column) of tabs.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/tabs
+  api: https://base-ui.com/react/components/tabs#api-reference
+---
+
+`Tabs` renders no DOM of its own. Compose it from `TabsList`, `TabsTab`,
+`TabsIndicator` (optional), and `TabsPanel`.
+
+## Basic
+
+<ComponentPreview name="tabs/basic" />
+
+## Line variant
+
+The `line` variant replaces the pill background with an underline that slides
+beneath the active tab. Use it for navigation-style tabs where the tab strip
+should blend into the page.
+
+Pass `variant="line"` to **both** `TabsList` and each `TabsTab` — they share
+the styling through group modifiers, but each needs its own class.
+
+<ComponentPreview name="tabs/line" />
+
+## Vertical
+
+Set `orientation="vertical"` on the root, the list, and each tab. Panels sit
+beside the list.
+
+<ComponentPreview name="tabs/vertical" />
+
+## With icons
+
+Tabs accept inline SVG icons. Non-sized icons inherit `size-4`.
+
+<ComponentPreview name="tabs/with-icons" />
+
+## Controlled
+
+Pass `value` and `onValueChange` to drive the active tab from outside.
+
+<ComponentPreview name="tabs/controlled" />
+
+## Disabled
+
+Individual tabs can be disabled. Disabled tabs are skipped by keyboard
+navigation and cannot be activated.
+
+<ComponentPreview name="tabs/disabled" />
+
+## RTL
+
+The tab strip uses logical layout (`justify-start` on vertical tabs, `gap`
+without direction-specific values), so the tabs and their panels flip with
+the page direction. The `TabsIndicator` positions itself using CSS variables
+that Base UI measures physically (`--active-tab-left`, `--active-tab-width`)
+— those measurements are relative to the list's left edge, so the pill
+follows the active tab in both directions without a `dir`-specific class.
+
+A `TabsIndicator` that needs to place itself on the vertical line variant’s
+trailing edge uses a physical `right` utility — worth verifying in an RTL
+page before shipping, as that position does not flip with `dir`.
+
+<ComponentPreview name="tabs/rtl" />
+
+## Props
+
+<PropsTable name="tabs" />
+
+## Guidelines
+
+<Guidelines name="tabs" />
