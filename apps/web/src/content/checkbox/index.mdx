@@ -1,0 +1,67 @@
+---
+title: Checkbox
+description: A checkbox with checked, unchecked, and indeterminate states.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/checkbox
+  api: https://base-ui.com/react/components/checkbox#api-reference
+---
+
+## Basic
+
+Pair `Checkbox` with `Label` via `htmlFor` and `id`. Clicking the label toggles
+the checkbox and screen readers announce them as one control.
+
+<ComponentPreview name="checkbox/basic" />
+
+## States
+
+Base UI drives all states via `data-*` attributes — the styling stays in sync
+even when the value is controlled from outside React.
+
+<ComponentPreview name="checkbox/states" />
+
+## Sizes
+
+`sm` (16px) fits dense tables; `md` (20px) is the default.
+
+<ComponentPreview name="checkbox/sizes" />
+
+## Group with "select all"
+
+`indeterminate` is separate from `checked` — pass both to render the "parent
+of mixed children" state.
+
+<ComponentPreview name="checkbox/group" />
+
+## Inside a Field
+
+For a row of checkboxes with a label and description, use
+`Field orientation="horizontal"`. Base UI wires the label to the control
+automatically — no `htmlFor` needed.
+
+<ComponentPreview name="checkbox/in-field" />
+
+## Custom icon
+
+Pass any children to replace the default check/minus glyph.
+
+<ComponentPreview name="checkbox/custom-icon" />
+
+## RTL
+
+The checkbox itself is symmetric, so it looks identical in LTR and RTL.
+Only the surrounding flex layout flips: a label placed after the box in JSX
+appears on the reading-start side (right) in an RTL page. The extended
+click area (`after:-inset-x-3`) is symmetric, so the 44×44 touch target
+holds in both directions.
+
+<ComponentPreview name="checkbox/rtl" />
+
+## Props
+
+<PropsTable name="checkbox" />
+
+## Guidelines
+
+<Guidelines name="checkbox" />
