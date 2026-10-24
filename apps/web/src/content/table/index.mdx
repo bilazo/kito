@@ -1,0 +1,48 @@
+---
+title: Table
+description: A data table. Plain semantic HTML — no sorting, pagination, or selection logic.
+category: Components
+---
+
+## Basic
+
+`Table` wraps itself in a horizontally scrollable container so wide tables
+don't overflow the page on small screens.
+
+<ComponentPreview name="table/basic" />
+
+## With caption
+
+Add a `TableCaption` as the first child of `Table`. It renders below the
+table (`caption-bottom`) in muted text.
+
+<ComponentPreview name="table/with-caption" />
+
+## With footer
+
+`TableFooter` gets a muted background and bold text, useful for totals or
+summaries. Use `colSpan` on a `TableCell` to span multiple columns.
+
+<ComponentPreview name="table/with-footer" />
+
+## Selected row
+
+Set `data-state="selected"` on a `TableRow` to give it a subtle background
+— the same visual used by data tables that track a selected row.
+
+<ComponentPreview name="table/selected-row" />
+
+## RTL
+
+Every part uses logical properties (`text-start`, `pe-0`) so the table flips
+with the page direction.
+
+<ComponentPreview name="table/rtl" />
+
+## Props
+
+<PropsTable name="table" />
+
+## Guidelines
+
+<Guidelines name="table" />
