@@ -33,9 +33,9 @@ describe('InputGroup', () => {
     render(<InputGroup data-testid="group" />)
     const cls = screen.getByTestId('group').className
     expect(cls).toContain('focus-within:border-ring')
-    expect(cls).toContain('has-[[aria-invalid=true]]:border-destructive')
-    expect(cls).toContain('has-[[data-invalid]]:border-destructive')
-    expect(cls).toContain('has-[:disabled]:opacity-50')
+    expect(cls).toContain('has-aria-invalid:border-destructive')
+    expect(cls).toContain('has-data-invalid:border-destructive')
+    expect(cls).toContain('has-disabled:opacity-50')
   })
 
   test('forwards ref to the underlying div', () => {

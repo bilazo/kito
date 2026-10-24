@@ -40,7 +40,7 @@ const badgeStyles = cva(
 /* Props                                                                      */
 /* -------------------------------------------------------------------------- */
 
-/** Props defined by Kito UI. */
+/** Props defined by Kito. */
 export interface BadgeOwnProps {
   /**
    * Visual style of the badge:

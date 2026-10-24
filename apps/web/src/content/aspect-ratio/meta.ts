@@ -70,7 +70,7 @@ export const meta: ComponentMeta = {
       title: 'Absolute overlay inside the frame',
       description:
         'Because the root is `relative`, an absolutely-positioned child anchors to the frame. Use this for captions, gradients, or controls on top of the image without extra wrappers.',
-      code: `import { AspectRatio } from '@bilazo/kito/components/aspect-ratio'\n\n<AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg">\n  <img src="/cover.jpg" alt="" className="size-full object-cover" />\n  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />\n  <p className="absolute bottom-3 start-3 text-sm text-white">Caption</p>\n</AspectRatio>`,
+      code: `import { AspectRatio } from '@bilazo/kito/components/aspect-ratio'\n\n<AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg">\n  <img src="/cover.jpg" alt="" className="size-full object-cover" />\n  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />\n  <p className="absolute bottom-3 inset-s-3 text-sm text-white">Caption</p>\n</AspectRatio>`,
     },
   ],
 }
