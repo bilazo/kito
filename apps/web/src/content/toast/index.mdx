@@ -1,0 +1,106 @@
+---
+title: Toast
+description: A brief notification that appears at a corner of the viewport.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/toast
+  api: https://base-ui.com/react/components/toast#api-reference
+---
+
+## Basic
+
+Mount `Toaster` **once** near the app root. It reads every toast from the
+shared `toast` manager and renders them.
+
+Call `toast(...)` from anywhere — an event handler, a route loader, outside
+any component:
+
+```tsx
+// In the app root
+import { Toaster } from '@bilazo/kito/components/toast'
+
+export function App() {
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>
+  )
+}
+```
+
+```tsx
+// Anywhere else
+import { toast } from '@bilazo/kito/components/toast'
+
+toast('Your changes have been saved.')
+```
+
+<ComponentPreview name="toast/basic" />
+
+## Variants
+
+`toast.success`, `toast.error`, `toast.warning`, `toast.info`, and
+`toast.loading` are shortcuts that set the icon and the semantic color.
+
+<ComponentPreview name="toast/variants" />
+
+## With a title
+
+Pass an object to render a title above the description:
+
+```tsx
+toast({
+  title: 'Message sent',
+  description: 'We will get back to you within 24 hours.',
+})
+```
+
+<ComponentPreview name="toast/with-title" />
+
+## With an action
+
+An action button lets the user react without opening another UI — "Undo"
+after a delete, "Retry" after a failed upload, "View" after a background
+save.
+
+<ComponentPreview name="toast/with-action" />
+
+## Promise
+
+`toast.promise` tracks a promise through loading → success / error. Each
+state accepts either a bare message or a full `ToastInput` (with title,
+action, …).
+
+<ComponentPreview name="toast/promise" />
+
+## Dismissing
+
+`toast.dismiss(id)` closes one toast; `toast.dismiss()` closes every toast
+and clears their timers. Each toast also has a close button, and one is
+auto-dismissed after its `duration` unless `duration: Infinity` is passed.
+
+<ComponentPreview name="toast/dismiss" />
+
+## RTL
+
+Positions are **physical**, not logical — `top-right` means the top-right
+of the viewport, and stays there in an RTL page. This is intentional: a
+notification at "top-right" should be at the top-right of the screen
+regardless of the page’s reading direction. The stack direction follows
+the position (top positions stack downward, bottom positions upward).
+
+The toast content itself (icon → title → description → action → close)
+respects the surrounding `DirectionProvider`, so a Persian user with
+`<DirectionProvider direction="rtl">` at the root sees the icon on the
+right and the close button on the left — no `dir` prop on the toast.
+
+<ComponentPreview name="toast/rtl" />
+
+## Props
+
+<PropsTable name="toast" />
+
+## Guidelines
+
+<Guidelines name="toast" />
