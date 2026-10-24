@@ -1,0 +1,72 @@
+---
+title: Avatar
+description: A profile image with an automatic fallback and optional status.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/avatar
+  api: https://base-ui.com/react/components/avatar#api-reference
+---
+
+## Basic
+
+Base UI tracks the image load state itself. While the image is loading — or
+after it fails — the `AvatarFallback` is shown. There is no layout shift and
+no broken-image icon.
+
+<ComponentPreview name="avatar/basic" />
+
+## Sizes
+
+`sm`, `md`, and `lg` line up exactly with `Button` and `Input` heights, so an
+avatar sits flush next to a form control. `xl` is for profile headers.
+
+<ComponentPreview name="avatar/sizes" />
+
+## Fallback
+
+The fallback renders whenever the image is unavailable. Typically initials,
+but any content works.
+
+<ComponentPreview name="avatar/fallback" />
+
+## With badge
+
+`AvatarBadge` sits at the bottom-end corner and sizes itself from the parent
+avatar. Pass `status` for the common presence states, or any children for a
+custom icon badge.
+
+> A bare colored dot is not announced by screen readers. If the status is
+> meaningful, expose it in text elsewhere.
+
+<ComponentPreview name="avatar/with-badge" />
+
+## Group
+
+Overlapping row of avatars. Overlap uses a logical margin, so it behaves the
+same in RTL and LTR.
+
+<ComponentPreview name="avatar/group" />
+
+## Group with overflow
+
+Pass `max` to collapse the rest into a single `+N` avatar.
+
+<ComponentPreview name="avatar/group-with-max" />
+
+## RTL
+
+Everything is logical: `AvatarBadge` sits at `bottom-end` (so it flips
+sides in RTL), `AvatarGroup` overlaps with a `-ms-2` margin (so the
+overlap direction flips with the reading direction), and the fallback text
+follows `dir="auto"` from its own content. No per-component `dir` prop is
+needed.
+
+<ComponentPreview name="avatar/rtl" />
+
+## Props
+
+<PropsTable name="avatar" />
+
+## Guidelines
+
+<Guidelines name="avatar" />
