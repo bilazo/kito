@@ -1,0 +1,67 @@
+---
+title: Textarea
+description: A multi-line text input.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/field
+  api: https://base-ui.com/react/components/field#api-reference
+---
+
+Built on Base UI's `Field.Control` rendered as a `<textarea>`, so it will pick
+up label, description, error, and disabled wiring automatically once `Field`
+ships.
+
+## Basic
+
+<ComponentPreview name="textarea/basic" />
+
+## Sizes
+
+`size` controls the minimum height, padding, and font size. `sm`, `md`, and
+`lg` share the same `--control-*` tokens as `Button` and `Input`.
+
+<ComponentPreview name="textarea/sizes" />
+
+## Auto resize
+
+Pass `autoResize` to make the field grow with its content (CSS
+`field-sizing: content`). Browsers without support fall back to `rows`. Manual
+resize is disabled in this mode.
+
+<ComponentPreview name="textarea/auto-resize" />
+
+## Resize
+
+By default the user can drag the bottom edge (`resize-y`). With `autoResize`,
+the browser resizes for them.
+
+<ComponentPreview name="textarea/resize" />
+
+## States
+
+<ComponentPreview name="textarea/states" />
+
+Mark a textarea invalid with `aria-invalid`. When inside a Base UI `Field`, the field sets `data-invalid` on the control automatically; the
+styling is identical either way.
+
+## With label
+
+Pair `Textarea` with `Label` using `htmlFor` and `id`.
+
+<ComponentPreview name="textarea/with-label" />
+
+## RTL
+
+Inside an RTL page the textarea inherits the reading direction, and
+`dir="auto"` still lets Persian and Latin content each pick their own
+direction. No per-field `dir` prop is needed.
+
+<ComponentPreview name="textarea/rtl" />
+
+## Props
+
+<PropsTable name="textarea" />
+
+## Guidelines
+
+<Guidelines name="textarea" />
