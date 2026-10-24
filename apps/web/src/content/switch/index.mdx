@@ -1,0 +1,60 @@
+---
+title: Switch
+description: A binary on/off toggle for a setting that takes effect immediately.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/switch
+  api: https://base-ui.com/react/components/switch#api-reference
+---
+
+> Use a switch for a setting applied right away (notifications, dark mode).
+> For a choice the user confirms with a Save button, use `Checkbox` — a switch
+> implies "already applied".
+
+## Basic
+
+Pair `Switch` with `Label` via `htmlFor` and `id`.
+
+<ComponentPreview name="switch/basic" />
+
+## States
+
+<ComponentPreview name="switch/states" />
+
+## Sizes
+
+`md` (44 × 24 px) is the default; `sm` (36 × 20 px) fits dense tables.
+
+<ComponentPreview name="switch/sizes" />
+
+## Controlled
+
+Pass `checked` and `onCheckedChange` to drive the state from outside.
+
+<ComponentPreview name="switch/controlled" />
+
+## Inside a Field
+
+For a row with a label and description, use `Field orientation="horizontal"`.
+Base UI wires the label to the control automatically.
+
+<ComponentPreview name="switch/in-field" />
+
+## RTL
+
+The thumb is positioned with `inset-inline-start` (a logical CSS property),
+so it sits on the reading-start side when off and slides to the
+reading-end side when on — automatically, with no `dir`-specific code. In
+an RTL page, "start" is the right side, so the thumb starts at the right
+and moves left when toggled. The visible track itself is symmetric and
+looks identical in both directions.
+
+<ComponentPreview name="switch/rtl" />
+
+## Props
+
+<PropsTable name="switch" />
+
+## Guidelines
+
+<Guidelines name="switch" />
