@@ -1,0 +1,74 @@
+---
+title: Slider
+description: A control for selecting a value from a range.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/slider
+  api: https://base-ui.com/react/components/slider#api-reference
+---
+
+The number of thumbs is derived from `value` / `defaultValue`:
+
+```tsx
+<Slider defaultValue={33} />          // one thumb
+<Slider defaultValue={[25, 75]} />    // two thumbs — a range
+<Slider defaultValue={[10, 50, 90]} /> // three thumbs
+```
+
+## Basic
+
+<ComponentPreview name="slider/basic" />
+
+## Range
+
+An array value gives a two-thumb range slider. The lower thumb cannot be
+dragged past the upper one — Base UI clamps the movement.
+
+<ComponentPreview name="slider/range" />
+
+## Sizes
+
+<ComponentPreview name="slider/sizes" />
+
+## Vertical
+
+Set `orientation="vertical"` and give the wrapper a height. Useful for
+volume-style controls or stacked comparisons.
+
+<ComponentPreview name="slider/vertical" />
+
+## Controlled
+
+Pass `value` and `onValueChange` to drive the state from outside. The value
+is always an array, even for a single-thumb slider.
+
+<ComponentPreview name="slider/controlled" />
+
+## Disabled
+
+<ComponentPreview name="slider/disabled" />
+
+## RTL
+
+Base UI flips the axis automatically when `dir="rtl"` is set on the slider
+or an ancestor. The track fills from the reading start (right in RTL).
+
+<ComponentPreview name="slider/rtl" />
+
+## Keyboard
+
+| Key                       | Action                |
+| ------------------------- | --------------------- |
+| `ArrowRight` / `ArrowUp`  | Increase by `step`    |
+| `ArrowLeft` / `ArrowDown` | Decrease by `step`    |
+| `Home`                    | Jump to `min`         |
+| `End`                     | Jump to `max`         |
+| `PageUp` / `PageDown`     | Move by a larger step |
+
+## Props
+
+<PropsTable name="slider" />
+
+## Guidelines
+
+<Guidelines name="slider" />
