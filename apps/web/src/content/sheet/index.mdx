@@ -1,0 +1,104 @@
+---
+title: Sheet
+description: A slide-in panel anchored to one edge of the viewport.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/dialog
+  api: https://base-ui.com/react/components/dialog#api-reference
+---
+
+Sheet shares its primitive with [`Dialog`](/components/dialog) — the same
+focus trapping, scroll locking, Escape-to-close, and outside-click-to-close
+behaviour. Only the shell differs: Dialog is centered, Sheet is anchored.
+
+## Basic
+
+<ComponentPreview name="sheet/basic" />
+
+## Sides
+
+`side` accepts logical values:
+
+- **`start`** — the inline-start edge (left in LTR, right in RTL)
+- **`end`** — the inline-end edge (right in LTR, left in RTL) — the default
+- **`top`**, **`bottom`** — physical edges, used for action sheets and
+  notifications
+
+The panel flips automatically in RTL, and the slide animation follows.
+
+<ComponentPreview name="sheet/sides" />
+
+## Navigation
+
+A common use: a slide-in navigation drawer on small screens. Set
+`showCloseButton={false}` if each nav item already closes the sheet.
+
+<ComponentPreview name="sheet/navigation" />
+
+## Action sheet
+
+`side="bottom"` with `showCloseButton={false}` gives the mobile action-sheet
+pattern — a short panel from the bottom with the footer actions as the only
+path.
+
+<ComponentPreview name="sheet/action-sheet" />
+
+## With a form
+
+<ComponentPreview name="sheet/with-form" />
+
+## Long content
+
+The panel is a flex column. Its content area scrolls when it overflows
+(`max-h-[85vh]` on top/bottom sides).
+
+<ComponentPreview name="sheet/long-content" />
+
+## Full-bleed content
+
+The popup has **no padding of its own**. Padding lives on each section, so
+you can insert full-bleed content — an image, a table, a divider — between
+the header, body, and footer:
+
+```tsx
+<SheetPopup>
+  <SheetHeader>…</SheetHeader>
+  <SheetBody>
+    <img src="…" className="w-full" />
+    <div className="p-6">…</div>
+  </SheetBody>
+  <SheetFooter>…</SheetFooter>
+</SheetPopup>
+```
+
+Because the popup is padding-free, the scrollbar inside `SheetBody` also
+touches the panel edge rather than floating inside a padded shell.
+
+<ComponentPreview name="sheet/full-bleed" />
+
+## Controlled
+
+Pass `open` and `onOpenChange` to drive the state from outside.
+
+<ComponentPreview name="sheet/controlled" />
+
+## RTL
+
+`Sheet` uses logical properties (`inset-inline-start`, `border-s`, `rounded-s`,
+`inset-e-*`) so the panel and its border, radius, and close button flip
+automatically when the page is in RTL. Only the enter/exit transforms need an
+explicit override, because `translate-x` is a physical axis.
+
+In a real Persian app, set `<html dir="rtl">` once and everything just works.
+Inside the docs, the popup is portaled to `document.body`, so each example
+passes `dir="rtl"` on `SheetPopup` directly to demo the effect.
+
+<ComponentPreview name="sheet/rtl" />
+
+## Props
+
+<PropsTable name="sheet" />
+
+## Guidelines
+
+<Guidelines name="sheet" />
