@@ -2,6 +2,22 @@ import { cn } from 'cn'
 
 import type * as React from 'react'
 
+/** Props defined by Kito. */
+export interface TableOwnProps {
+  /**
+   * Classes for the outer scroll container. Use it to cap the height and
+   * pair with a sticky `TableHeader` for a scrolling table with a fixed
+   * header.
+   */
+  containerClassName?: string
+}
+
+/** Props forwarded to the underlying `<table>` element. */
+export type TableHTMLProps = React.ComponentProps<'table'>
+
+/** Public composed props. */
+export interface TableProps extends TableOwnProps, TableHTMLProps {}
+
 /**
  * A data table. Plain semantic HTML with our styling — no sorting, no
  * pagination, no row selection logic. Wire any of those yourself around
@@ -12,18 +28,7 @@ import type * as React from 'react'
  * plain `<table>`/`<thead>`/`<tbody>`/`<tr>`/`<th>`/`<td>` — nothing here
  * needs managed state.
  */
-export function Table({
-  className,
-  containerClassName,
-  ...props
-}: React.ComponentProps<'table'> & {
-  /**
-   * Classes for the outer scroll container. Use it to cap the height and
-   * pair with a sticky `TableHeader` for a scrolling table with a fixed
-   * header.
-   */
-  containerClassName?: string
-}) {
+export function Table({ className, containerClassName, ...props }: TableProps) {
   return (
     <div
       data-slot="table-container"
