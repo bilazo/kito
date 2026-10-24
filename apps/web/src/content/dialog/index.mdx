@@ -1,0 +1,83 @@
+---
+title: Dialog
+description: A centered modal for a focused task.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/dialog
+  api: https://base-ui.com/react/components/dialog#api-reference
+---
+
+Base UI handles focus trapping, scroll locking, Escape-to-close, and
+outside-click-to-close.
+
+## Basic
+
+Compose a dialog from `DialogTrigger`, `DialogPopup`, `DialogHeader`,
+`DialogTitle`, `DialogDescription`, and `DialogFooter`.
+
+`DialogTitle` provides the accessible name of the dialog — every dialog must
+have one. `DialogDescription` is optional; when present it's wired to the
+popup via `aria-describedby`.
+
+<ComponentPreview name="dialog/basic" />
+
+## Confirmation
+
+For an irreversible action, set `showCloseButton={false}` on the popup. The
+footer actions become the only path — no accidental Escape or corner-X
+dismissal.
+
+<ComponentPreview name="dialog/confirmation" />
+
+## Sizes
+
+`sm`, `md` (default), and `lg` control the maximum popup width. The popup
+always keeps at least `1rem` from the viewport edges on small screens.
+
+<ComponentPreview name="dialog/sizes" />
+
+## Long content
+
+The popup is wrapped in a full-screen scroll container. When the content is
+taller than the viewport, the _wrapper_ scrolls — the popup stays centered on
+short content and grows naturally on tall content. Nothing gets clipped.
+
+<ComponentPreview name="dialog/long-content" />
+
+## Controlled
+
+Pass `open` and `onOpenChange` to drive the open state from outside — useful
+for opening the dialog programmatically, or for wiring it to a form library's
+submit result.
+
+<ComponentPreview name="dialog/controlled" />
+
+## With a form
+
+The dialog is a container; put any content inside. Field controls
+(`Input`, `Textarea`, `Select`, …) all work.
+
+<ComponentPreview name="dialog/with-form" />
+
+## RTL
+
+`Dialog` uses logical properties throughout — the close button sits at
+`inset-e-3` (top-**end**, which flips to the top-left in RTL), the footer
+aligns its actions to `justify-end` (which flips to the left in RTL), and
+the popup padding is symmetric. The content flips with the page direction.
+
+**Portal gotcha:** the popup is portaled to `document.body`, so it does not
+inherit `dir="rtl"` from any wrapper. In a real Persian app, `<html
+dir="rtl">` covers it. In this docs preview, the demo passes
+`dir="rtl"` on `DialogPopup` directly to demo the effect — the same
+exception documented for `SheetPopup`.
+
+<ComponentPreview name="dialog/rtl" />
+
+## Props
+
+<PropsTable name="dialog" />
+
+## Guidelines
+
+<Guidelines name="dialog" />

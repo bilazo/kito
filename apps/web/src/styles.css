@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+@import '@bilazo/kito/styles/defaults.css';
+
+@plugin "@tailwindcss/typography";
+
+/*
+ * Tell Tailwind that `dark:` should trigger on an ancestor with `.dark`,
+ * not on the OS-level `prefers-color-scheme`. The library ships its
+ * semantic tokens via a `.dark { … }` selector and expects class-based
+ * dark mode; without this directive, Tailwind utilities like
+ * `dark:prose-invert` never fire.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Shiki light*/
+html .shiki,
+html .shiki span {
+  color: var(--shiki-light) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+/* Shiki: swap the CSS variables when the .dark class is on <html>. */
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+[data-slot='dialog-popup'][dir='rtl'],
+[data-file='rtl'] {
+  font-family: IRANYekan;
+}
+
+/*
+ * Runtime-adjustable token knobs. Consumers (and the docs site's settings
+ * panel) override these on :root to preview different brand colors,
+ * roundness, and control sizes without a rebuild.
+ *
+ * Every knob below is consumed by another token in this file. If you remove
+ * one of these, the settings panel's sliders will stop working.
+ */
+:root {
+  /* Hue channel for the brand color scale (0–360, oklch). */
+  --brand-hue: 149.2;
+  /* Multiplier applied to every --control-* height. */
+  --control-scale: 1;
+
+  /* ---------------------------------------------------------------------- */
+  /* Brand                                                                  */
+  /* ---------------------------------------------------------------------- */
+
+  --color-brand-50: oklch(0.975 0.023 var(--brand-hue));
+  --color-brand-100: oklch(0.95 0.046 var(--brand-hue));
+  --color-brand-200: oklch(0.9 0.095 var(--brand-hue));
+  --color-brand-300: oklch(0.83 0.179 var(--brand-hue));
+  --color-brand-400: oklch(0.75 0.195 var(--brand-hue));
+  --color-brand-500: oklch(0.661 0.179 var(--brand-hue));
+  --color-brand-600: oklch(0.507 0.141 var(--brand-hue));
+  --color-brand-700: oklch(0.432 0.119 var(--brand-hue));
+  --color-brand-800: oklch(0.367 0.101 var(--brand-hue));
+  --color-brand-900: oklch(0.302 0.085 var(--brand-hue));
+  --color-brand-950: oklch(0.252 0.074 var(--brand-hue));
+}
+:root {
+  --radius: 0.625rem;
+  --control-sm: calc(2rem * var(--control-scale));
+  --control-md: calc(2.5rem * var(--control-scale));
+  --control-lg: calc(3rem * var(--control-scale));
+}

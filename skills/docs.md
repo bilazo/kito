@@ -249,3 +249,19 @@ Every value export besides the root component must get one sentence in
 If a component has no helper exports, `propsNote` should still describe the
 underlying Base UI primitive and any behavior that is not obvious from the
 props table (default `aria-hidden`, `data-invalid` handling, `dir` heuristic).
+
+### Required MDX sections
+
+Every `index.mdx` must end with:
+
+    ## Props
+
+    <PropsTable name="<component>" />
+
+    ## Guidelines
+
+    <Guidelines name="<component>" />
+
+`<PropsTable>` and `<Guidelines>` both read from `meta.ts`. Without
+`<Guidelines>`, the `whenToUse` / `whenNotToUse` arrays are never rendered
+on the page — they only end up in `llms-full.txt`.
