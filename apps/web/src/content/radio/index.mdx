@@ -1,0 +1,70 @@
+---
+title: Radio
+description: A group of mutually-exclusive options.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/radio
+  api: https://base-ui.com/react/components/radio#api-reference
+---
+
+## Basic
+
+`RadioGroup` owns the shared value; each `Radio` inside it is one option. Base
+UI handles arrow-key navigation, roving tabindex, and the shared `name` for
+form submission.
+
+Always give the group an accessible name via `aria-label` or
+`aria-labelledby`.
+
+<ComponentPreview name="radio/basic" />
+
+## States
+
+<ComponentPreview name="radio/states" />
+
+## Sizes
+
+`sm` (16px) fits dense tables; `md` (20px) is the default. Set `size` on the
+`RadioGroup` to apply it to every option, or on an individual `Radio` to
+override it.
+
+<ComponentPreview name="radio/sizes" />
+
+## Horizontal
+
+<ComponentPreview name="radio/horizontal" />
+
+## Controlled
+
+Pass `value` and `onValueChange` on the `RadioGroup` to drive the state from
+outside.
+
+<ComponentPreview name="radio/controlled" />
+
+## Inside a Field
+
+For a group of options with descriptions, wrap each row in a `Field` and the
+whole group in a `FieldSet` with a `FieldLegend`. Base UI wires the labels to
+their controls automatically.
+
+<ComponentPreview name="radio/in-field" />
+
+## RTL
+
+The radio circle itself is symmetric, so it looks identical in LTR and
+RTL. Only the surrounding flex layout flips: a `Label` placed after the
+`Radio` in JSX appears on the reading-start side (right) in an RTL page.
+The extended click area (`after:-inset-3`) is symmetric, so the 44×44
+touch target holds in both directions. The selected dot is centered with
+flexbox (not a `translate` transform), so it is direction-agnostic by
+construction — no extra RTL code is needed.
+
+<ComponentPreview name="radio/rtl" />
+
+## Props
+
+<PropsTable name="radio" />
+
+## Guidelines
+
+<Guidelines name="radio" />
