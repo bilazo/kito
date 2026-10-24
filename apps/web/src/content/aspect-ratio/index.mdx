@@ -1,0 +1,57 @@
+---
+title: Aspect Ratio
+description: Constrains its child to a fixed aspect ratio.
+category: Components
+---
+
+The child fills the container — use `size-full` plus `object-cover` (or
+`object-contain`) to control how a media element fits.
+
+## Basic
+
+Pass `ratio` as `width / height`. The value is a number; write it as an
+expression so TypeScript evaluates the arithmetic:
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <img src="…" alt="…" className="size-full object-cover" />
+</AspectRatio>
+```
+
+<ComponentPreview name="aspect-ratio/basic" />
+
+## Square
+
+`ratio={1}` gives a square. Useful for avatars, thumbnails, and grid
+layouts where every cell must be the same size.
+
+<ComponentPreview name="aspect-ratio/square" />
+
+## Portrait
+
+`ratio={9 / 16}` (or any other vertical proportion) for cards and media
+that should be taller than they are wide.
+
+<ComponentPreview name="aspect-ratio/portrait" />
+
+## With an image
+
+The most common use: a fixed-ratio frame for an image that may be any size.
+
+<ComponentPreview name="aspect-ratio/with-image" />
+
+## RTL
+
+`AspectRatio` uses `aspect-ratio` from CSS, which is direction-agnostic —
+the frame stays the same size in LTR and RTL. Only the child's content
+positioning might change if you use logical properties inside it.
+
+<ComponentPreview name="aspect-ratio/rtl" />
+
+## Props
+
+<PropsTable name="aspect-ratio" />
+
+## Guidelines
+
+<Guidelines name="aspect-ratio" />
