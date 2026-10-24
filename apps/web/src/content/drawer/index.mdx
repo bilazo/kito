@@ -1,0 +1,116 @@
+---
+title: Drawer
+description: A swipeable sheet anchored to one edge of the viewport.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/drawer
+  api: https://base-ui.com/react/components/drawer#api-reference
+---
+
+Drawer shares Base UI's Dialog primitive with [`Sheet`](/components/sheet) —
+same focus trapping, scroll locking, Escape-to-close. The difference is the
+gesture layer: Base UI adds drag handling, a release threshold, and snap
+points on top.
+
+## Basic
+
+Compose from `DrawerTrigger`, `DrawerPopup`, `DrawerHeader`, `DrawerTitle`,
+`DrawerDescription`, `DrawerBody`, and `DrawerFooter`. Set `showSwipeHandle`
+for a visual drag affordance.
+
+<ComponentPreview name="drawer/basic" />
+
+## Sides
+
+`side` chooses both the edge the drawer is anchored to and the direction the
+user swipes to dismiss. The default is `bottom` — the mobile action-sheet
+pattern.
+
+<ComponentPreview name="drawer/sides" />
+
+## Floating side drawer
+
+For `side="left"` and `side="right"`, pass `variant="floating"` to detach
+the panel from the viewport edges on `md+` viewports. The panel gets a small
+inset on the outer side, top, and bottom; all four corners rounded; a soft
+shadow; and a slightly wider default.
+
+Use this for inspector or detail panels where the user benefits from
+glancing back at the underlying list.
+
+**No effect on `top` / `bottom` sides** — those are always flush. **No
+effect below the `md` breakpoint** — mobile always renders flush so the
+panel uses the full screen width.
+
+<ComponentPreview name="drawer/floating" />
+
+## Snap points
+
+Pass `snapPoints` to make the drawer snap to discrete heights. Each entry is
+a CSS length (`'31rem'`) or a viewport fraction (`0.5`, `1`). The user drags
+between them; the release snaps to the nearest point.
+
+<ComponentPreview name="drawer/snap-points" />
+
+## Scrollable content
+
+Wrap the middle content in `DrawerBody` to keep the header and footer pinned
+while the body scrolls. The panel itself is padding-free — each section owns
+its padding, so you can also insert full-bleed content between them.
+
+<ComponentPreview name="drawer/scrollable" />
+
+## Nested drawers
+
+A `Drawer` opened from within another `Drawer` is detected automatically.
+The parent dims; the child opens above it. Place the nested drawer inside the
+parent's `DrawerPopup` — Base UI links them through the render tree.
+
+<ComponentPreview name="drawer/nested" />
+
+## Action sheet
+
+`side="bottom"` (the default) with no swipe handle is the standard action
+sheet: a short panel from the bottom with the footer actions as the only
+path.
+
+<ComponentPreview name="drawer/action-sheet" />
+
+## With a form
+
+<ComponentPreview name="drawer/with-form" />
+
+## RTL
+
+`Drawer`’s `side` is **physical** (`left` / `right` / `top` / `bottom`),
+not logical (`start` / `end`). This is deliberate — the mobile action-sheet
+pattern reads better with a fixed physical edge, and a `side="right"`
+drawer stays on the right even in an RTL page.
+
+This is the main design difference from `Sheet`:
+
+| Aspect          | `Drawer`                          | `Sheet`                    |
+| --------------- | --------------------------------- | -------------------------- |
+| Sides           | Physical (`left` / `right`)       | Logical (`start` / `end`)  |
+| RTL flip        | Does **not** flip                 | Flips automatically        |
+| Gesture         | Swipe to dismiss                  | None                       |
+| Snap points     | Yes                               | No                         |
+| Nested stacking | Yes                               | No                         |
+| Close button    | None (swipe / footer is the path) | Top-end corner, by default |
+
+**Portal gotcha:** the popup is portaled to `document.body`, so it does not
+inherit `dir="rtl"` from any wrapper. In a real Persian app, `<html
+dir="rtl">` covers it. In this docs preview, the demo passes `dir="rtl"`
+on `DrawerPopup` directly — the same exception documented for `SheetPopup`
+and `DialogPopup`. Swipe directions (`swipeDirection` per side) are also
+physical — a `side="right"` drawer in RTL is still swiped right to dismiss.
+
+<ComponentPreview name="drawer/rtl" />
+
+## Props
+
+<PropsTable name="drawer" />
+
+## Guidelines
+
+<Guidelines name="drawer" />

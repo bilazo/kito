@@ -30,6 +30,7 @@ html.dark .shiki span {
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
+[data-slot='drawer-popup'][dir='rtl'],
 [data-slot='dialog-popup'][dir='rtl'],
 [data-file='rtl'] {
   font-family: IRANYekan;
