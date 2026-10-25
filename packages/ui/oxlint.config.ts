@@ -57,6 +57,7 @@ export default defineConfig({
         'jsdoc/require-param': 'off',
         'jsx-a11y/control-has-associated-label': 'off',
         'jsx-a11y/prefer-tag-over-role': 'off',
+        'jsx-a11y/label-has-associated-control': 'off',
       },
     },
 

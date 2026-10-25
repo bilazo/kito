@@ -1,0 +1,86 @@
+---
+title: Button Group
+description: A container that groups related buttons together with consistent styling.
+category: Components
+---
+
+`ButtonGroup` groups related buttons into a single visual unit — adjacent
+buttons share a border, the group rounds only at its two outer edges, and
+focus rings are lifted so they are not clipped by neighbors.
+
+Wrap any of `Button`, `Input`, `Select` trigger, `Menu` trigger, a nested
+`ButtonGroup`, `ButtonGroupText`, or `ButtonGroupSeparator`.
+
+**ButtonGroup vs ToggleGroup.** Use `ButtonGroup` when grouping buttons that
+**perform an action**. Use `ToggleGroup` (not built yet) for buttons that
+**toggle a state** — each toggle exposes `aria-pressed`, which `ButtonGroup`
+does not.
+
+## Basic
+
+<ComponentPreview name="button-group/basic" />
+
+## Orientation
+
+`vertical` stacks the buttons in a column and rounds the top and bottom
+instead of the sides. Give the group a height with `className="h-fit"` when
+the buttons should not stretch to fill their parent.
+
+<ComponentPreview name="button-group/orientation" />
+
+## Separator
+
+`ButtonGroupSeparator` divides two buttons — the split-button pattern. Use
+it between an outline button and a filled one, or between a primary action
+and its menu trigger where the shared border would be confusing.
+
+<ComponentPreview name="button-group/with-separator" />
+
+## With input
+
+An `Input` as a direct child flexes to fill the remaining width — the
+search-bar pattern.
+
+<ComponentPreview name="button-group/with-input" />
+
+## Nested groups
+
+Nest a `ButtonGroup` inside another to create two visual clusters with a
+small gap between them.
+
+<ComponentPreview name="button-group/nested" />
+
+## Accessibility
+
+- The group carries `role="group"`.
+- Tab moves between the buttons in the group; each button is a normal
+  focusable target.
+- Give the group an `aria-label` or `aria-labelledby` so screen readers
+  announce the group's purpose.
+
+```tsx
+<ButtonGroup aria-label="Alignment">
+  <Button>Left</Button>
+  <Button>Center</Button>
+  <Button>Right</Button>
+</ButtonGroup>
+```
+
+## RTL
+
+`ButtonGroup` uses logical properties throughout — `rounded-s-lg` /
+`rounded-e-lg` on the outer edges, `border-s-0` on non-first children, and
+`end-2` on separators. The whole group flips with the page direction
+without any per-component code. Give the `ButtonGroup` a single border via
+the wrapping element or a parent div, or set it per-button as in the
+examples.
+
+<ComponentPreview name="button-group/rtl" />
+
+## Props
+
+<PropsTable name="button-group" />
+
+## Guidelines
+
+<Guidelines name="button-group" />
