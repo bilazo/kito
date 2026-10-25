@@ -1,0 +1,84 @@
+---
+title: Popover
+description: A panel anchored to a trigger, opened by click.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/popover
+  api: https://base-ui.com/react/components/popover#api-reference
+---
+
+Unlike [`Tooltip`](/components/tooltip), a Popover:
+
+- opens on click, not hover
+- stays open until dismissed (outside click, Escape, or an explicit close)
+- is fully interactive — inputs, buttons, and links inside work as usual
+
+For a list of commands, use `Menu` instead.
+
+## Basic
+
+<ComponentPreview name="popover/basic" />
+
+## Sides
+
+`side` accepts `top`, `bottom`, `left`, `right`. The default is `bottom`.
+
+<ComponentPreview name="popover/sides" />
+
+## With a form
+
+The popup is fully interactive. Put a `Field` inside to build an inline edit
+form.
+
+<ComponentPreview name="popover/with-form" />
+
+## With an explicit close
+
+`PopoverClose` closes the popup on click. Render it as a ghost icon button
+in the top-end corner for a dismissable callout.
+
+<ComponentPreview name="popover/with-close" />
+
+## Without an arrow
+
+Pass `showArrow={false}` for a plain panel. Use this when the popup opens
+flush against the trigger or when an arrow would just add noise.
+
+<ComponentPreview name="popover/no-arrow" />
+
+## Controlled
+
+Pass `open` and `onOpenChange` to drive the open state from outside.
+
+<ComponentPreview name="popover/controlled" />
+
+## RTL
+
+`Popover`’s `side` is **physical** — `left` / `right` do not flip when the
+page direction is RTL. In an app that serves both LTR and RTL, pick the
+side from the current direction:
+
+```tsx
+<PopoverPopup side={dir === 'rtl' ? 'right' : 'left'}>
+```
+
+The content inside the popup respects `dir="rtl"` on its subtree, so
+`PopoverHeader`'s full-width divider, the title, and the description all
+flip correctly once `dir` is set.
+
+**Portal gotcha:** the popup is portaled to `document.body`, so it does not
+inherit `dir="rtl"` from any wrapper. In a real Persian app, `<html
+dir="rtl">` covers it. In this docs preview, the demo passes `dir="rtl"`
+on `PopoverPopup` directly — the same exception documented for
+`SheetPopup`, `DialogPopup`, `DrawerPopup`, `SelectPopup`, and
+`ComboboxPopup`.
+
+<ComponentPreview name="popover/rtl" />
+
+## Props
+
+<PropsTable name="popover" />
+
+## Guidelines
+
+<Guidelines name="popover" />
