@@ -55,6 +55,8 @@ export default defineConfig({
       rules: {
         'jsdoc/require-returns': 'off',
         'jsdoc/require-param': 'off',
+        'jsx-a11y/control-has-associated-label': 'off',
+        'jsx-a11y/prefer-tag-over-role': 'off',
       },
     },
 

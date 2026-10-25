@@ -1,0 +1,99 @@
+---
+title: Item
+description: A flexible container for one row of content — media, title, description, and actions.
+category: Components
+---
+
+Use `Item` for **displaying** content. For a form control row (checkbox,
+input, select), use [`Field`](/components/field).
+
+## Basic
+
+```tsx
+<Item>
+  <ItemMedia variant="icon">
+    <FileIcon />
+  </ItemMedia>
+  <ItemContent>
+    <ItemTitle>Report.pdf</ItemTitle>
+    <ItemDescription>Updated 2 days ago</ItemDescription>
+  </ItemContent>
+  <ItemActions>
+    <Button size="sm">Open</Button>
+  </ItemActions>
+</Item>
+```
+
+<ComponentPreview name="item/basic" />
+
+## Variants
+
+- **`default`** — transparent; sits flat on whatever surface it is in
+- **`outline`** — bordered; use to visually separate items
+- **`muted`** — soft filled; good for a selected or hovered state
+
+<ComponentPreview name="item/variants" />
+
+## Sizes
+
+`sm` and `xs` shrink padding and gap for compact lists, dropdown menus, and
+sidebars.
+
+<ComponentPreview name="item/sizes" />
+
+## Media
+
+`ItemMedia` accepts an icon (`variant="icon"`), an image (`variant="image"`),
+an avatar, or any custom content. The `image` variant scales with the
+`Item`'s size — 40 px at `default`, 32 px at `sm`, 24 px at `xs`.
+
+<ComponentPreview name="item/with-media" />
+
+## Header and footer
+
+`ItemHeader` and `ItemFooter` are full-width rows that sit above and below
+the main content. `Item` is a flex-wrap container, so `basis-full` forces
+them onto their own lines.
+
+<ComponentPreview name="item/with-header-footer" />
+
+## Group
+
+`ItemGroup` renders `role="list"` and stacks items with a consistent
+vertical gap. Add `ItemSeparator` between items for a divided list.
+
+<ComponentPreview name="item/group" />
+
+## As a link
+
+`Item` is polymorphic. Pass `render` to render it as an anchor — the hover
+and focus styles travel with the change.
+
+```tsx
+<Item render={<a href="/dashboard" />}>
+  <ItemMedia variant="icon">
+    <HomeIcon />
+  </ItemMedia>
+  <ItemContent>
+    <ItemTitle>Dashboard</ItemTitle>
+    <ItemDescription>Overview of your account.</ItemDescription>
+  </ItemContent>
+</Item>
+```
+
+<ComponentPreview name="item/as-link" />
+
+## RTL
+
+Every part uses logical properties (`ms-auto`, `text-start`) and flex layout,
+so `Item` behaves identically in LTR and RTL.
+
+<ComponentPreview name="item/rtl" />
+
+## Props
+
+<PropsTable name="item" />
+
+## Guidelines
+
+<Guidelines name="item" />
