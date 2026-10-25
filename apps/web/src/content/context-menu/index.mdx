@@ -1,0 +1,91 @@
+---
+title: Context Menu
+description: A menu of actions triggered by right-click.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/context-menu
+  api: https://base-ui.com/react/components/context-menu#api-reference
+---
+
+`ContextMenu` shares its primitive with [`Menu`](/components/menu) — the
+same roving tabindex, arrow-key navigation, typeahead, and submenu
+opening — only the trigger differs: right-click opens the menu at the
+**pointer**, not below a button.
+
+Use it for actions on an object the user has already focused with a
+right-click — a file, a row, a table cell, an image. For a menu triggered
+by a visible button, use `Menu`.
+
+## Basic
+
+Wrap the area the menu applies to in `ContextMenuTrigger` — its children
+are the right-click target. The menu opens at the cursor and closes on
+Escape or outside click.
+
+<ComponentPreview name="context-menu/basic" />
+
+## With icons and shortcuts
+
+Item icons (inline SVG) and `ContextMenuShortcut` render at the start and
+end of each row. The shortcut is purely decorative — wire the actual
+handler elsewhere.
+
+<ComponentPreview name="context-menu/with-shortcuts" />
+
+## Groups
+
+`ContextMenuGroup` + `ContextMenuGroupLabel` for a heading;
+`ContextMenuSeparator` between groups.
+
+<ComponentPreview name="context-menu/with-groups" />
+
+## Checkbox items
+
+`ContextMenuCheckboxItem` toggles one or many options and keeps the menu
+open (`closeOnClick: false` by default) — a checkbox group is multi-select.
+
+<ComponentPreview name="context-menu/checkbox-items" />
+
+## Radio items
+
+`ContextMenuRadioGroup` + `ContextMenuRadioItem` for a single choice.
+Selecting an item closes the menu (`closeOnClick: true` by default).
+
+<ComponentPreview name="context-menu/radio-items" />
+
+## Submenu
+
+`ContextMenuSub` / `ContextMenuSubTrigger` / `ContextMenuSubPopup` opens a
+nested menu on hover or keyboard activation. The default `side="right"`
+places the submenu on the physical right of the parent item (assumes LTR);
+in an RTL page, pass `side="left"` — the chevron flips automatically to
+match via `rtl:-scale-x-100`.
+
+<ComponentPreview name="context-menu/with-submenu" />
+
+## RTL
+
+Sides are **physical** — `left` / `right` do not flip with `dir`. This is
+the same policy as `Menu`, `Tooltip`, and `Popover`; in a bilingual app,
+pick the side from the current direction at the call site.
+`ContextMenuSubPopup` defaults to `side="right"` (LTR); in RTL pass
+`side="left"` — the chevron flips automatically to match.
+
+The main popup opens at the cursor, so it has no `side` — but the content
+still needs `dir="rtl"` for logical padding (`ps-8`, `inset-e-2`) and the
+chevron flip. **Portal gotcha:** both `ContextMenuPopup` and
+`ContextMenuSubPopup` are portaled to `document.body`, so they do not
+inherit `dir="rtl"` from any wrapper. Pass `dir="rtl"` on the popup
+directly — the same exception documented for `MenuPopup`,
+`PopoverPopup`, `SelectPopup`, `ComboboxPopup`, `SheetPopup`,
+`DialogPopup`, and `DrawerPopup`.
+
+<ComponentPreview name="context-menu/rtl" />
+
+## Props
+
+<PropsTable name="context-menu" />
+
+## Guidelines
+
+<Guidelines name="context-menu" />

@@ -101,9 +101,22 @@ export interface MenuPopupOwnProps {
    * @default 0
    */
   alignOffset?: number
+
+  /**
+   * Direction on the popup subtree. The popup is **portaled to
+   * `document.body`**, so it does not inherit `dir` from any wrapper — pass
+   * it here when the page's `<html dir="rtl">` is not set.
+   *
+   * Base UI's `Positioner` computes `align` from this direction: with
+   * `align="start"` in RTL, the popup's **right** edge aligns with the
+   * trigger's right edge.
+   *
+   * @default undefined (inherits from `<html dir>`)
+   */
+  dir?: BaseMenu.Popup.Props['dir']
 }
 
-export type MenuPopupBaseUiProps = Omit<BaseMenu.Popup.Props, 'className'>
+export type MenuPopupBaseUiProps = Omit<BaseMenu.Popup.Props, 'className' | 'dir'>
 
 export interface MenuPopupProps extends MenuPopupOwnProps, MenuPopupBaseUiProps {
   className?: string
@@ -121,6 +134,7 @@ export function MenuPopup({
   sideOffset = 6,
   align = 'start',
   alignOffset = 0,
+  dir,
   className,
   children,
   ...props
@@ -132,10 +146,15 @@ export function MenuPopup({
         sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
-        dir={(props as { dir?: 'ltr' | 'rtl' }).dir}
+        dir={dir}
         className="z-50 outline-none"
       >
-        <BaseMenu.Popup data-slot="menu-popup" className={cn(menuPopupBase, className)} {...props}>
+        <BaseMenu.Popup
+          data-slot="menu-popup"
+          dir={dir}
+          className={cn(menuPopupBase, className)}
+          {...props}
+        >
           {children}
         </BaseMenu.Popup>
       </BaseMenu.Positioner>
@@ -488,19 +507,6 @@ export type MenuSubProps = BaseMenu.SubmenuRoot.Props
 /**
  * A nested submenu. Place a `MenuSubTrigger` and a `MenuSubPopup` inside,
  * within the parent `MenuPopup`.
- *
- * ```tsx
- * <MenuPopup>
- *   <MenuItem>Cut</MenuItem>
- *   <MenuSub>
- *     <MenuSubTrigger>Share</MenuSubTrigger>
- *     <MenuSubPopup>
- *       <MenuItem>Email</MenuItem>
- *       <MenuItem>Copy link</MenuItem>
- *     </MenuSubPopup>
- *   </MenuSub>
- * </MenuPopup>
- * ```
  */
 export function MenuSub(props: MenuSubProps) {
   return <BaseMenu.SubmenuRoot data-slot="menu-sub" {...props} />
@@ -565,9 +571,16 @@ export interface MenuSubPopupOwnProps {
    * @default -4
    */
   alignOffset?: number
+
+  /**
++   * Direction on the popup subtree.
++   *
++   * @default undefined (inherits from `<html dir>`)
++   */
+  dir?: BaseMenu.Popup.Props['dir']
 }
 
-export type MenuSubPopupBaseUiProps = Omit<BaseMenu.Popup.Props, 'className'>
+export type MenuSubPopupBaseUiProps = Omit<BaseMenu.Popup.Props, 'className' | 'dir'>
 
 export interface MenuSubPopupProps extends MenuSubPopupOwnProps, MenuSubPopupBaseUiProps {
   className?: string
@@ -583,6 +596,7 @@ export function MenuSubPopup({
   sideOffset = 4,
   align = 'start',
   alignOffset = -4,
+  dir,
   className,
   children,
   ...props
@@ -594,10 +608,12 @@ export function MenuSubPopup({
         sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
+        dir={dir}
         className="z-50 outline-none"
       >
         <BaseMenu.Popup
           data-slot="menu-sub-popup"
+          dir={dir}
           className={cn(menuPopupBase, className)}
           {...props}
         >

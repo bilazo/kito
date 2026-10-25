@@ -46,6 +46,12 @@ export const meta: ComponentMeta = {
 
   props: [
     {
+      name: 'dir',
+      type: "'ltr' | 'rtl'",
+      description:
+        'Direction on the popup subtree. The popup is **portaled to `document.body`**, so it does not inherit `dir` from any wrapper — pass it here when the page’s `<html dir="rtl">` is not set. Also reaches the `Positioner` so a submenu with `align="start"` aligns at the reading-start edge (right in RTL). Same portal exception as `MenuPopup` / `PopoverPopup` / `SelectPopup` / `ComboboxPopup` / `SheetPopup` / `DialogPopup` / `DrawerPopup`. `ContextMenuPopup` / `ContextMenuSubPopup` prop.',
+    },
+    {
       name: 'side',
       type: "'top' | 'bottom' | 'left' | 'right'",
       default: "'bottom' (MenuPopup) / 'right' (MenuSubPopup)",
