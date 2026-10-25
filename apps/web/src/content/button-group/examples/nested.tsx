@@ -1,24 +1,31 @@
 import { Button } from '@bilazo/kito/components/button'
 import { ButtonGroup } from '@bilazo/kito/components/button-group'
-import { Bold, Italic, Underline } from 'lucide-react'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@bilazo/kito/components/input-group'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@bilazo/kito/components/tooltip'
+import { AudioLinesIcon, Bold, Italic, PlusIcon, Underline } from 'lucide-react'
 
 export default function Nested() {
   return (
-    <ButtonGroup aria-label="Formatting">
-      <ButtonGroup aria-label="Text style">
-        <Button variant="outline" size="icon" aria-label="Bold">
-          <Bold />
-        </Button>
-        <Button variant="outline" size="icon" aria-label="Italic">
-          <Italic />
-        </Button>
-        <Button variant="outline" size="icon" aria-label="Underline">
-          <Underline />
+    <ButtonGroup>
+      <ButtonGroup>
+        <Button variant="outline" size="icon">
+          <PlusIcon />
         </Button>
       </ButtonGroup>
-      <ButtonGroup aria-label="Actions">
-        <Button variant="outline">Copy</Button>
-        <Button variant="outline">Paste</Button>
+      <ButtonGroup>
+        <InputGroup>
+          <InputGroupInput placeholder="Send a message..." />
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <InputGroupAddon align="inline-end">
+                  <AudioLinesIcon />
+                </InputGroupAddon>
+              }
+            />
+            <TooltipContent>Voice Mode</TooltipContent>
+          </Tooltip>
+        </InputGroup>
       </ButtonGroup>
     </ButtonGroup>
   )

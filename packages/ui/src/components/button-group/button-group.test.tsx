@@ -21,6 +21,7 @@ describe('ButtonGroup', () => {
   test('defaults to horizontal orientation', () => {
     render(<ButtonGroup data-testid="group" />)
     const group = screen.getByTestId('group')
+    expect(group).not.toHaveClass('flex-col')
     expect(group).toHaveClass('flex', 'w-fit', 'items-stretch')
     expect(group.className).toContain('[&>[data-slot]:first-child]:rounded-s-lg')
   })
@@ -29,6 +30,7 @@ describe('ButtonGroup', () => {
     render(<ButtonGroup orientation="vertical" data-testid="group" />)
     const group = screen.getByTestId('group')
     expect(group).toHaveAttribute('data-orientation', 'vertical')
+    expect(group).toHaveClass('flex-col')
     expect(group.className).toContain('[&>[data-slot]:first-child]:rounded-t-lg')
     expect(group.className).toContain('[&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-lg')
     // Vertical uses `border-t-0` on non-first children, not `border-s-0`.
