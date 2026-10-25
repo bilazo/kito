@@ -1,0 +1,110 @@
+---
+title: Menu
+description: A dropdown menu of commands or links.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/menu
+  api: https://base-ui.com/react/components/menu#api-reference
+---
+
+Use Menu for **commands**. For a list of values the user picks from, use
+[`Select`](/components/select). For a rich panel (inputs, links, cards), use
+[`Popover`](/components/popover).
+
+## Basic
+
+<ComponentPreview name="menu/basic" />
+
+## With icons and shortcuts
+
+Menu items accept inline SVG icons. `MenuShortcut` renders a right-aligned
+hint — the actual key handling must be wired elsewhere.
+
+<ComponentPreview name="menu/with-icons" />
+
+## Checkbox items
+
+`MenuCheckboxItem` shows a checkmark when active. The menu **stays open**
+after a toggle, since a checkbox group is multi-select.
+
+<ComponentPreview name="menu/checkbox-items" />
+
+## Radio items
+
+`MenuRadioGroup` + `MenuRadioItem` for a single choice. Selecting one
+**closes the menu**, because a radio is single-select.
+
+<ComponentPreview name="menu/radio-items" />
+
+## With submenus
+
+Place a `MenuSub`, `MenuSubTrigger`, and `MenuSubPopup` inside the parent
+menu. The submenu opens on hover or keyboard activation, to the reading-end
+side.
+
+<ComponentPreview name="menu/with-submenu" />
+
+## With groups and separators
+
+`MenuGroup` + `MenuGroupLabel` for a heading; `MenuSeparator` between
+groups.
+
+<ComponentPreview name="menu/with-groups" />
+
+## Link items
+
+`MenuLinkItem` renders a real `<a>` with proper menu semantics — it stays in
+the roving tab order and closes the menu on activation.
+
+Menu is framework-agnostic. Pass `render` to integrate with any router:
+
+```tsx
+// Plain anchor
+;<MenuLinkItem href="/profile">Profile</MenuLinkItem>
+
+// Next.js
+import Link from 'next/link'
+;<MenuLinkItem render={<Link href="/profile" />}>Profile</MenuLinkItem>
+
+// TanStack Router
+import { Link } from '@tanstack/react-router'
+;<MenuLinkItem render={<Link to="/profile" />}>Profile</MenuLinkItem>
+```
+
+<ComponentPreview name="menu/link-items" />
+
+## Controlled
+
+Pass `open` and `onOpenChange` to drive the open state from outside.
+
+<ComponentPreview name="menu/controlled" />
+
+## RTL
+
+Menu uses logical properties in the parts that matter — `MenuShortcut` sits
+at `ms-auto` (the reading-end of the item), and `MenuSubTrigger`'s chevron
+flips with `rtl:-scale-x-100`.
+
+Sides are **physical** — `left` / `right` do not flip with `dir`. This is
+the same policy as `Tooltip` and `Popover`; in a bilingual app, pick the
+side from the current direction at the call site. `MenuSubPopup` defaults
+to `side="right"` (assumes LTR); in an RTL page, pass `side="left"` — the
+chevron flips automatically to match, so the visual and semantic
+direction stay aligned.
+
+**Portal gotcha:** both `MenuPopup` and `MenuSubPopup` are portaled to
+`document.body`, so they do not inherit `dir="rtl"` from any wrapper. In a
+real Persian app, `<html dir="rtl">` covers it. In this docs preview, the
+demo passes `dir="rtl"` on both popups directly — the same exception
+documented for `Tooltip`, `Popover`, `Select`, `Combobox`, `Sheet`,
+`Dialog`, and `Drawer`.
+
+<ComponentPreview name="menu/rtl" />
+
+## Props
+
+<PropsTable name="menu" />
+
+## Guidelines
+
+<Guidelines name="menu" />

@@ -35,6 +35,8 @@ html.dark .shiki span {
 [data-slot='select-popup'][dir='rtl'],
 [data-slot='combobox-popup'][dir='rtl'],
 [data-slot='popover-popup'][dir='rtl'],
+[data-slot='menu-popup'][dir='rtl'],
+[data-slot='menu-sub-popup'][dir='rtl'],
 [data-file='rtl'] {
   font-family: IRANYekan;
 }
