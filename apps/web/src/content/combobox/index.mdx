@@ -1,0 +1,84 @@
+---
+title: Combobox
+description: A searchable dropdown — a text input that filters a list as you type.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/combobox
+  api: https://base-ui.com/react/components/combobox#api-reference
+---
+
+> For a short fixed list with no typing, prefer
+> [`Select`](/components/select). Combobox is for longer lists where the user
+> knows what they're looking for.
+
+## Basic
+
+Pass `items` to the root as an array of `{ value, label }` objects. Base UI
+filters the list as the user types and matches against the `label`.
+
+Each `ComboboxItem` receives the **whole item object** as its `value` prop —
+not `item.value`. This is how Base UI knows what to display in the input.
+
+<ComponentPreview name="combobox/basic" />
+
+## Sizes
+
+`sm` and `md` share the `--control-*` tokens with `Input` and
+`SelectTrigger`.
+
+<ComponentPreview name="combobox/sizes" />
+
+## Controlled
+
+Pass `value` and `onValueChange` to drive the selected item from outside.
+
+<ComponentPreview name="combobox/controlled" />
+
+## Grouped options
+
+Use `ComboboxGroup` with `ComboboxGroupLabel` for a heading and
+`ComboboxSeparator` between groups. Groups still respect filtering — an empty
+group hides itself.
+
+<ComponentPreview name="combobox/grouped" />
+
+## Empty state
+
+`ComboboxEmpty` shows automatically when nothing matches. You don't control
+its visibility.
+
+<ComponentPreview name="combobox/with-empty" />
+
+## Inside a Field
+
+`Field` provides the label and layout. The input fills the field width by
+default, matching `Input`.
+
+<ComponentPreview name="combobox/in-field" />
+
+## RTL
+
+`Combobox` uses logical properties throughout — the input group’s padding
+is `ps-3 pe-1`, the items use `ps-3 pe-8`, and the checkmark sits at
+`inset-e-2`. Every part flips with the page direction. The input inherits
+`dir="rtl"` from the preview wrapper automatically, and the flex row
+(`[input, clear, chevron]`) reverses in RTL so the chevron sits on the
+left (end) and the input text starts at the right.
+
+**Portal gotcha:** the popup is portaled to `document.body`, so it does
+not inherit `dir="rtl"` from any wrapper. In a real Persian app, `<html
+dir="rtl">` covers it. In this docs preview, the demo passes `dir="rtl"`
+on `ComboboxPopup` directly — the same exception documented for
+`SelectPopup`, `SheetPopup`, `DialogPopup`, and `DrawerPopup`. Without it,
+the items’ logical `ps-3` / `pe-8` and the checkmark’s `inset-e-2` would
+resolve to the wrong side.
+
+<ComponentPreview name="combobox/rtl" />
+
+## Props
+
+<PropsTable name="combobox" />
+
+## Guidelines
+
+<Guidelines name="combobox" />

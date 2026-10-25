@@ -33,6 +33,7 @@ html.dark .shiki span {
 [data-slot='drawer-popup'][dir='rtl'],
 [data-slot='dialog-popup'][dir='rtl'],
 [data-slot='select-popup'][dir='rtl'],
+[data-slot='combobox-popup'][dir='rtl'],
 [data-file='rtl'] {
   font-family: IRANYekan;
 }
