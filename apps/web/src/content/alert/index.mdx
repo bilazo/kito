@@ -1,0 +1,59 @@
+---
+title: Alert
+description: A callout for user attention.
+category: Components
+---
+
+`Alert` is a small surface for a message the user should notice — a
+heads-up, an error, an action prompt. Compose it from `AlertTitle`, an
+optional `AlertDescription`, and an optional `AlertAction`. The alert
+renders `role="alert"` (an assertive live region) by default.
+
+Put an SVG icon as a **direct child** of `Alert` and the layout switches to
+two columns: icon + content, with the icon spanning both the title and the
+description rows. Without an icon, the alert collapses to a single column.
+
+## Basic
+
+<ComponentPreview name="alert/basic" />
+
+## Without an icon
+
+Without an SVG child, the alert is a single column — the title and
+description stack.
+
+<ComponentPreview name="alert/without-icon" />
+
+## Destructive
+
+Use `variant="destructive"` for errors and irreversible warnings. The icon,
+title, and description all inherit the destructive color; the description
+uses a softer tint (`text-destructive/90`) so the title stays visually
+stronger than the body.
+
+<ComponentPreview name="alert/destructive" />
+
+## With an action
+
+`AlertAction` pins a trailing control (usually a `Button`) to the top-end
+corner. The alert reserves end padding when an action is present so the
+title and description do not underlap it.
+
+<ComponentPreview name="alert/action" />
+
+## RTL
+
+`Alert` uses logical properties throughout — `text-start` on the body,
+`pe-18` when an action is present, and `end-2` on `AlertAction` — so every
+part flips with the page direction. The icon column is direction-agnostic
+(it comes first in reading order regardless of writing direction).
+
+<ComponentPreview name="alert/rtl" />
+
+## Props
+
+<PropsTable name="alert" />
+
+## Guidelines
+
+<Guidelines name="alert" />
