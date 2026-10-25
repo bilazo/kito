@@ -1,0 +1,67 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/accordion
+  api: https://base-ui.com/react/components/accordion#api-reference
+---
+
+`Accordion` is a stack of `AccordionItem`s. Each item pairs an
+`AccordionTrigger` with an `AccordionContent`. Base UI handles the ARIA
+wiring (`aria-expanded`, `aria-controls`, `role="region"`), keyboard
+navigation (Enter / Space to toggle, ArrowUp / ArrowDown to move between
+triggers, Home / End to jump to the ends), and the open/close animation via
+the `--accordion-panel-height` CSS variable.
+
+Only one item is open at a time by default. Pass `multiple` to allow any
+number of items to be open simultaneously.
+
+## Basic
+
+The first item is open on mount via `defaultValue`.
+
+<ComponentPreview name="accordion/basic" />
+
+## Multiple
+
+Pass `multiple` to allow more than one item open at a time.
+
+<ComponentPreview name="accordion/multiple" />
+
+## Disabled
+
+Individual items can be disabled with `disabled` on `AccordionItem`.
+
+<ComponentPreview name="accordion/disabled" />
+
+## With icons
+
+An icon inside the trigger adds a visual key to the section. Put it in a
+`bg-muted` square for a small, consistent chip.
+
+<ComponentPreview name="accordion/with-icons" />
+
+## Inside a card
+
+Wrap the `Accordion` in a `Card` for a FAQ-style layout.
+
+<ComponentPreview name="accordion/card" />
+
+## RTL
+
+Every part uses logical properties (`ms-auto`, `text-start`), so the
+accordion flips with the page direction. The chevron rotates 180° when an
+item is open — a direction-agnostic transform, so no `rtl:` override is
+needed. Accordion does not portal its content, so the preview's direction
+reaches every part.
+
+<ComponentPreview name="accordion/rtl" />
+
+## Props
+
+<PropsTable name="accordion" />
+
+## Guidelines
+
+<Guidelines name="accordion" />

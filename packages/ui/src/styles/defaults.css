@@ -145,6 +145,28 @@
       transform: translateX(100%);
     }
   }
+
+  /* Accordion — height animation driven by Base UI's panel variable. */
+  --animate-accordion-down: accordion-down 200ms ease-out;
+  --animate-accordion-up: accordion-up 200ms ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--accordion-panel-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--accordion-panel-height);
+    }
+    to {
+      height: 0;
+    }
+  }
 }
 
 /* -------------------------------------------------------------------------- */

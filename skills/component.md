@@ -271,3 +271,36 @@ define at least one own prop. The split is what makes the docs generator
 route each prop to the right tab — with no own prop, there is nothing to
 route, and the doc generator treats `*Props` as **Component** origin, which
 is correct for the base-UI-derived props plus a className override.
+
+## Shared animation keyframes live in `defaults.css`
+
+When a component needs a CSS animation driven by a CSS variable (like
+`--accordion-panel-height`), the keyframes MUST live in the `@theme` block
+of `packages/ui/src/styles/defaults.css` — not inline in the component:
+
+    --animate-accordion-down: accordion-down 200ms ease-out;
+    --animate-accordion-up: accordion-up 200ms ease-out;
+
+    @keyframes accordion-down {
+      from { height: 0; }
+      to { height: var(--accordion-panel-height); }
+    }
+
+The component references them by name:
+
+    data-open:animate-accordion-down data-closed:animate-accordion-up motion-reduce:animate-none
+
+Why:
+
+- **One source of truth.** Duration and easing belong in the theme so an
+  app can override `--animate-accordion-down` from a stylesheet without
+  touching the component.
+- **Tree-shakeable.** Tailwind only emits the keyframe if the class name
+  appears in a scanned file — inline keyframes force every consumer to
+  ship the CSS.
+- **Consistent reduced-motion handling.** Every animation entry must have a
+  `motion-reduce:animate-none` companion in the component.
+
+Existing entries: `--animate-shimmer` (Skeleton), `--animate-progress-
+indeterminate` (Progress), `--animate-accordion-down` / `--animate-
+accordion-up` (Accordion).
