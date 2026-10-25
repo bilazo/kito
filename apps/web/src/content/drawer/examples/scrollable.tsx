@@ -13,7 +13,7 @@ import {
 
 export default function Scrollable() {
   return (
-    <Drawer showSwipeHandle>
+    <Drawer showSwipeHandle snapPoints={[0.6, 1]} defaultSnapPoint={0.6}>
       <DrawerTrigger render={<Button variant="outline" />}>Terms of service</DrawerTrigger>
       <DrawerPopup>
         <DrawerHeader>

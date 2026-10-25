@@ -457,8 +457,8 @@ export function DrawerHandle({ className, ...props }: DrawerHandleProps) {
         'cursor-grab active:cursor-grabbing',
         side === 'bottom' && 'mt-3 mb-2 h-1.5 w-10 mx-auto',
         side === 'top' && 'mt-2 mb-3 h-1.5 w-10 order-last mx-auto',
-        side === 'left' && 'ms-2 me-3 h-10 w-1.5 order-last my-auto',
-        side === 'right' && 'ms-3 me-2 h-10 w-1.5 my-auto',
+        side === 'left' && 'right-3 h-10 w-1.5 absolute top-1/2 -translate-y-1/2',
+        side === 'right' && 'left-3 h-10 w-1.5 absolute top-1/2 -translate-y-1/2',
         className,
       )}
       {...props}
