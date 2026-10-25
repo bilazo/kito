@@ -1,0 +1,74 @@
+---
+title: Select
+description: A dropdown for choosing one option from a list.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/select
+  api: https://base-ui.com/react/components/select#api-reference
+---
+
+`Select` renders no DOM element of its own — it manages the value and open
+state. All visible parts are separate components.
+
+## Basic
+
+Pass `items` as an array of `{ value, label }`. `SelectValue` reads the
+selected item's label from this list, so you never have to write the lookup
+yourself.
+
+<ComponentPreview name="select/basic" />
+
+## Sizes
+
+`sm` and `md` share the `--control-*` tokens with `Button` and `Input`, so a
+select and an input can sit in the same row at matching heights.
+
+<ComponentPreview name="select/sizes" />
+
+## States
+
+<ComponentPreview name="select/states" />
+
+## Controlled
+
+Pass `value` and `onValueChange` to drive the state from outside.
+
+<ComponentPreview name="select/controlled" />
+
+## Grouped options
+
+Use `SelectGroup` with `SelectGroupLabel` for a visible heading and
+`SelectSeparator` between groups.
+
+<ComponentPreview name="select/grouped" />
+
+## Inside a Field
+
+`Field` provides the label and layout. `SelectTrigger` fills the field width
+by default, matching `Input`.
+
+<ComponentPreview name="select/in-field" />
+
+## RTL
+
+`Select` uses logical properties throughout — `text-start` on the trigger
+and value, `ps-3 pe-8` on the items, `end-2` on the checkmark — so every
+part flips with the page direction. The trigger and value inherit
+`dir="rtl"` from the preview wrapper automatically.
+
+**Portal gotcha:** the popup is portaled to `document.body`, so it does not
+inherit `dir="rtl"` from any wrapper. In a real Persian app, `<html
+dir="rtl">` covers it. In this docs preview, the demo passes `dir="rtl"`
+on `SelectPopup` directly — the same exception documented for `SheetPopup`,
+`DialogPopup`, and `DrawerPopup`. Without it, the items’ logical `ps-3` /
+`pe-8` and the checkmark’s `end-2` would resolve to the wrong side.
+
+<ComponentPreview name="select/rtl" />
+
+## Props
+
+<PropsTable name="select" />
+
+## Guidelines
+
+<Guidelines name="select" />
