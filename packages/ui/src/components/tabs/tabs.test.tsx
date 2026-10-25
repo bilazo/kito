@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, test, vi } from 'vitest'
 
@@ -60,8 +60,10 @@ describe('Tabs', () => {
   test('clicking a tab switches the active panel', async () => {
     renderBasic()
     await userEvent.click(screen.getByRole('tab', { name: 'Projects' }))
-    expect(screen.getByText('Projects content')).toBeInTheDocument()
-    expect(screen.queryByText('Overview content')).not.toBeInTheDocument()
+    expect(await screen.findByText('Projects content')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.queryByText('Overview content')).not.toBeInTheDocument()
+    })
   })
 
   test('clicked tab becomes aria-selected', async () => {
