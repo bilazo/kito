@@ -4,7 +4,7 @@ export const meta: ComponentMeta = {
   exports: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'TooltipProvider'],
 
   summary:
-    'A small label that appears on hover or keyboard focus of a trigger. Tooltips are for short, supplementary labels — a keyboard shortcut, an icon name, a hint. Wrap the app once in TooltipProvider so all tooltips share the same hover delay.',
+    'A small label that appears on hover or keyboard focus of a trigger. Tooltips are for short, supplementary labels — a keyboard shortcut, an icon name, a hint. Wrap the app once in TooltipProvider so all tooltips share the same hover delay. Sides are physical (`top` / `right` / `bottom` / `left`); in an app that serves both LTR and RTL, pick the side from the current direction at the call site.',
 
   whenToUse: [
     'Give an icon-only button a short label — a toolbar action, an icon-only "close" or "more" trigger.',
@@ -24,10 +24,10 @@ export const meta: ComponentMeta = {
   props: [
     {
       name: 'side',
-      type: "'top' | 'bottom' | 'left' | 'right' | 'inline-start' | 'inline-end'",
+      type: "'top' | 'bottom' | 'left' | 'right'",
       default: "'top'",
       description:
-        'Side of the trigger where the tooltip appears. Prefer `inline-start` / `inline-end` when the placement should flip automatically in RTL. `TooltipContent` prop.',
+        'Side of the trigger where the tooltip appears. Sides are **physical** — `left` / `right` do not flip in RTL. In an app that serves both LTR and RTL, choose the side from the current direction (e.g. `side={dir === "rtl" ? "right" : "left"}`) rather than relying on a logical alias. `TooltipContent` prop.',
     },
     {
       name: 'sideOffset',
@@ -77,7 +77,7 @@ export const meta: ComponentMeta = {
   ],
 
   propsNote:
-    'Four components are exported. `TooltipProvider` (mount once, accepts `delay`) → `Tooltip` (root, accepts `open` / `defaultOpen` / `onOpenChange`) → `TooltipTrigger` (accepts `render` and `className`) → `TooltipContent` (accepts the side/align props and `showArrow`). `ArrowShape` is also exported as a low-level utility for building custom arrow shapes; it is not part of the day-to-day API.',
+    'Four components are exported. `TooltipProvider` (mount once, accepts `delay`) → `Tooltip` (root, accepts `open` / `defaultOpen` / `onOpenChange`) → `TooltipTrigger` (accepts `render` and `className`) → `TooltipContent` (accepts the side/align props and `showArrow`). Sides are physical — `left` / `right` do not flip in RTL, so an app serving both directions picks the side from the current direction at the call site. `ArrowShape` is also exported as a low-level utility for building custom arrow shapes (used by `PopoverArrow`); it is not part of the day-to-day API.',
 
   composition: [
     {
@@ -99,10 +99,10 @@ export const meta: ComponentMeta = {
       code: `import { Kbd } from '@bilazo/kito/components/kbd'\n\n<TooltipContent>Bold <Kbd>⌘B</Kbd></TooltipContent>`,
     },
     {
-      title: 'RTL-aware placement',
+      title: 'Direction-aware side',
       description:
-        'Use `inline-start` / `inline-end` instead of `left` / `right` so the tooltip flips automatically in RTL.',
-      code: `<TooltipContent side="inline-start">\n  Opens on the reading-start edge\n</TooltipContent>`,
+        'Sides are physical. In an app that serves both LTR and RTL, pick the side from the current direction at the call site — `right` in an RTL page is where `inline-start` would have put it.',
+      code: `<TooltipContent side={dir === 'rtl' ? 'right' : 'left'}>\n  Opens on the reading-start edge\n</TooltipContent>`,
     },
   ],
 }

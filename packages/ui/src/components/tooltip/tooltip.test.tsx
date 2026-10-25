@@ -5,10 +5,7 @@ import { describe, expect, test } from 'vitest'
 import { Button } from '../button/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
 
-function renderBasic(props?: {
-  side?: 'top' | 'bottom' | 'left' | 'right' | 'inline-start' | 'inline-end'
-  showArrow?: boolean
-}) {
+function renderBasic(props?: { side?: 'top' | 'bottom' | 'left' | 'right'; showArrow?: boolean }) {
   return render(
     <TooltipProvider delay={0}>
       <Tooltip>
@@ -109,15 +106,5 @@ describe('Tooltip', () => {
     await userEvent.hover(screen.getByRole('button', { name: 'Info' }))
     const tooltip = await screen.findByRole('tooltip')
     expect(tooltip).toHaveClass('custom-class')
-  })
-
-  test('inline-start keeps data-side on the arrow for RTL-aware positioning', async () => {
-    renderBasic({ side: 'inline-start' })
-    await userEvent.hover(screen.getByRole('button', { name: 'Add item' }))
-    await screen.findByRole('tooltip')
-    expect(document.querySelector('[data-slot="tooltip-arrow"]')).toHaveAttribute(
-      'data-side',
-      'inline-start',
-    )
   })
 })

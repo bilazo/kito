@@ -20,8 +20,10 @@ substitute for an accessible name.
 
 ## Sides
 
-`side` accepts `top`, `right`, `bottom`, `left`, `inline-start`, and
-`inline-end`. The default is `top`.
+`side` accepts `top`, `right`, `bottom`, and `left`. The default is `top`.
+Sides are **physical** — `left` / `right` do not flip in RTL. In an app
+that serves both LTR and RTL, pick the side from the current direction
+rather than a logical alias.
 
 <ComponentPreview name="tooltip/sides" />
 
@@ -47,8 +49,16 @@ of other UI.
 
 ## RTL
 
-Use `inline-start` and `inline-end` to place the tooltip on the reading
-start or end. The tooltip flips with the page direction automatically.
+`side` is physical — `left` / `right` do not flip in RTL. In an app that
+serves both LTR and RTL, choose the side from the current direction:
+
+```tsx
+<TooltipContent side={dir === 'rtl' ? 'right' : 'left'}>
+```
+
+The tooltip content itself follows `dir="rtl"` on its subtree (via the
+Provider or `<html dir="rtl">` in a real app), so Kbd and any inline text
+inside stay correct.
 
 <ComponentPreview name="tooltip/rtl" />
 

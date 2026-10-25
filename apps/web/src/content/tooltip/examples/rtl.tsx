@@ -19,7 +19,7 @@ export default function Rtl() {
 
         <Tooltip>
           <TooltipTrigger render={<Button variant="destructive" />}>حذف پروژه</TooltipTrigger>
-          <TooltipContent side="inline-start">این عمل قابل بازگشت نیست</TooltipContent>
+          <TooltipContent side="right">این عمل قابل بازگشت نیست</TooltipContent>
         </Tooltip>
 
         <Tooltip>
@@ -35,7 +35,7 @@ export default function Rtl() {
           <TooltipTrigger render={<Button size="icon" variant="ghost" aria-label="حذف" />}>
             <Trash2 />
           </TooltipTrigger>
-          <TooltipContent side="inline-end">حذف</TooltipContent>
+          <TooltipContent side="left">حذف</TooltipContent>
         </Tooltip>
       </div>
     </TooltipProvider>

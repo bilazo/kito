@@ -3,7 +3,7 @@ import { cn } from 'cn'
 
 import type * as React from 'react'
 
-type TooltipSide = 'top' | 'bottom' | 'left' | 'right' | 'inline-start' | 'inline-end'
+type TooltipSide = 'top' | 'bottom' | 'left' | 'right'
 
 type TooltipAlign = 'start' | 'center' | 'end'
 
@@ -69,8 +69,11 @@ export function TooltipTrigger({ className, ...props }: TooltipTriggerProps) {
 
 export interface TooltipContentOwnProps {
   /**
-   * Side of the trigger to place the tooltip on. Prefer logical sides
-   * (`inline-start` / `inline-end`) when the layout must flip in RTL.
+   * Side of the trigger to place the tooltip on. Sides are **physical** —
+   * `left` / `right` do not flip in RTL. In an app that serves both LTR and
+   * RTL, choose the side from the current direction
+   * (e.g. `side={dir === "rtl" ? "right" : "left"}`) rather than relying on a
+   * logical alias.
    *
    * @default "top"
    */
@@ -189,14 +192,10 @@ function TooltipArrow() {
       data-slot="tooltip-arrow"
       className={cn(
         'z-50',
-        // Physical sides — always the same direction.
         'data-[side=top]:-bottom-1',
         'data-[side=bottom]:-top-1',
         'data-[side=left]:-right-1',
         'data-[side=right]:-left-1',
-        // Logical sides — Base UI keeps `data-side` as the logical value (inline-start / inline-end) on the Arrow
-        'data-[side=inline-start]:-inset-e-1',
-        'data-[side=inline-end]:-inset-s-1',
       )}
     >
       <ArrowShape className="bg-foreground fill-foreground" />
