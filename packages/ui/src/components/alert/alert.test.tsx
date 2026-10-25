@@ -102,7 +102,7 @@ describe('Alert', () => {
     )
     const action = screen.getByTestId('action')
     expect(action).toHaveAttribute('data-slot', 'alert-action')
-    expect(action).toHaveClass('absolute', 'top-2', 'end-2')
+    expect(action).toHaveClass('absolute', 'top-2', 'inset-e-2')
     expect(action.className).not.toContain('right-2')
   })
 

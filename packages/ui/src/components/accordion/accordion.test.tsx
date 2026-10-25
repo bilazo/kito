@@ -131,7 +131,9 @@ describe('Accordion', () => {
     const chevron = trigger.querySelector('svg')!
     // jsdom cannot evaluate CSS, so this asserts the contract: the chevron
     // carries the group-aria-expanded selector that drives its rotation.
-    expect(chevron.className).toContain('group-aria-expanded/accordion-trigger:rotate-180')
+    expect(chevron.getAttribute('class')).toContain(
+      'group-aria-expanded/accordion-trigger:rotate-180',
+    )
   })
 
   test('disabled trigger carries the disabled selector contract', () => {

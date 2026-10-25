@@ -154,8 +154,8 @@ describe('Drawer', () => {
     test.each([
       ['bottom', 'mt-3', 'h-1.5', 'w-10'],
       ['top', 'mb-3', 'h-1.5', 'w-10'],
-      ['left', 'me-3', 'w-1.5', 'h-10'],
-      ['right', 'ms-3', 'w-1.5', 'h-10'],
+      ['left', 'right-3', 'w-1.5', 'h-10'],
+      ['right', 'left-3', 'w-1.5', 'h-10'],
     ] as const)(
       'renders a side-specific handle for side=%s',
       async (side, edgeMargin, height, width) => {

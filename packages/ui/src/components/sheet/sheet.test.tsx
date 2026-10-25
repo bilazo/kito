@@ -99,7 +99,7 @@ describe('Sheet', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Open' }))
       const dialog = await screen.findByRole('dialog')
       expect(dialog).toHaveAttribute('data-side', 'end')
-      expect(dialog).toHaveClass('inset-y-0', 'end-0', 'border-s')
+      expect(dialog).toHaveClass('inset-y-0', 'inset-e-0', 'border-s')
     })
 
     test('side=start anchors to the inline-start edge', async () => {
@@ -107,7 +107,7 @@ describe('Sheet', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Open' }))
       const dialog = await screen.findByRole('dialog')
       expect(dialog).toHaveAttribute('data-side', 'start')
-      expect(dialog).toHaveClass('inset-y-0', 'start-0', 'border-e')
+      expect(dialog).toHaveClass('inset-y-0', 'inset-s-0', 'border-e')
     })
 
     test('side=top anchors to the top edge', async () => {

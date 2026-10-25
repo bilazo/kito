@@ -91,7 +91,7 @@ describe('opening and closing', () => {
   test('clicking the trigger opens the popup', async () => {
     renderSelect()
     await userEvent.click(screen.getByRole('combobox'))
-    expect(screen.getByRole('listbox')).toBeInTheDocument()
+    expect(await screen.findByRole('listbox')).toBeInTheDocument()
   })
 
   test('the popup shows all options', async () => {
@@ -107,9 +107,11 @@ describe('opening and closing', () => {
   test('escape closes the popup', async () => {
     renderSelect()
     await userEvent.click(screen.getByRole('combobox'))
-    expect(screen.getByRole('listbox')).toBeInTheDocument()
+    expect(await screen.findByRole('listbox')).toBeInTheDocument()
     await userEvent.keyboard('{Escape}')
-    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
+    })
   })
 
   test('the selected item shows a checkmark', async () => {

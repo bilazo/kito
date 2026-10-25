@@ -1,7 +1,55 @@
-import { render, screen } from '@testing-library/react'
-import { describe, expect, test } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
+import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 
 import { ScrollArea, ScrollBar } from './scroll-area'
+
+// jsdom has no layout engine, so scrollHeight/clientHeight default to 0 and
+// Base UI's ScrollArea decides there is no overflow — skipping Scrollbar
+// and Corner entirely. Force a fixed overflow so those subcomponents mount.
+const originals = {
+  scrollHeight: Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollHeight'),
+  clientHeight: Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientHeight'),
+  scrollWidth: Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollWidth'),
+  clientWidth: Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientWidth'),
+}
+
+beforeAll(() => {
+  Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
+    configurable: true,
+    get() {
+      return 1000
+    },
+  })
+  Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
+    configurable: true,
+    get() {
+      return 100
+    },
+  })
+  Object.defineProperty(HTMLElement.prototype, 'scrollWidth', {
+    configurable: true,
+    get() {
+      return 1000
+    },
+  })
+  Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+    configurable: true,
+    get() {
+      return 100
+    },
+  })
+})
+
+afterAll(() => {
+  if (originals.scrollHeight)
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', originals.scrollHeight)
+  if (originals.clientHeight)
+    Object.defineProperty(HTMLElement.prototype, 'clientHeight', originals.clientHeight)
+  if (originals.scrollWidth)
+    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', originals.scrollWidth)
+  if (originals.clientWidth)
+    Object.defineProperty(HTMLElement.prototype, 'clientWidth', originals.clientWidth)
+})
 
 describe('ScrollArea', () => {
   test('renders the root with data-slot', () => {
@@ -16,16 +64,24 @@ describe('ScrollArea', () => {
     expect(document.querySelector('[data-slot="scroll-area-viewport"]')).toBeInTheDocument()
   })
 
-  test('renders a vertical scrollbar by default', () => {
+  test('renders a vertical scrollbar by default', async () => {
     render(<ScrollArea />)
-    const scrollbar = document.querySelector('[data-slot="scroll-area-scrollbar"]')
-    expect(scrollbar).toBeInTheDocument()
+    const scrollbar = await waitFor(() => {
+      const el = document.querySelector('[data-slot="scroll-area-scrollbar"]')
+      expect(el).toBeInTheDocument()
+      return el as HTMLElement
+    })
     expect(scrollbar).toHaveAttribute('data-orientation', 'vertical')
   })
 
-  test('renders a thumb inside the scrollbar', () => {
+  test('renders a thumb inside the scrollbar', async () => {
     render(<ScrollArea />)
-    expect(document.querySelector('[data-slot="scroll-area-thumb"]')).toBeInTheDocument()
+    const thumb = await waitFor(() => {
+      const el = document.querySelector('[data-slot="scroll-area-thumb"]')
+      expect(el).toBeInTheDocument()
+      return el
+    })
+    expect(thumb).toBeInTheDocument()
   })
 
   test('children render inside the viewport', () => {
@@ -50,46 +106,47 @@ describe('ScrollArea', () => {
 })
 
 describe('ScrollBar', () => {
-  test('vertical scrollbar uses the vertical layout classes', () => {
+  test('vertical scrollbar uses the vertical layout classes', async () => {
     render(
       <ScrollArea>
         <ScrollBar data-testid="scrollbar" orientation="vertical" />
       </ScrollArea>,
     )
-    const scrollbar = screen.getByTestId('scrollbar')
+    const scrollbar = await screen.findByTestId('scrollbar')
     expect(scrollbar).toHaveAttribute('data-orientation', 'vertical')
     expect(scrollbar.className).toContain('data-[orientation=vertical]:w-2.5')
     expect(scrollbar.className).toContain('data-[orientation=vertical]:h-full')
   })
 
-  test('horizontal scrollbar uses the horizontal layout classes', () => {
+  test('horizontal scrollbar uses the horizontal layout classes', async () => {
     render(
       <ScrollArea>
         <ScrollBar data-testid="scrollbar" orientation="horizontal" />
       </ScrollArea>,
     )
-    const scrollbar = screen.getByTestId('scrollbar')
+    const scrollbar = await screen.findByTestId('scrollbar')
     expect(scrollbar).toHaveAttribute('data-orientation', 'horizontal')
     expect(scrollbar.className).toContain('data-[orientation=horizontal]:h-2.5')
     expect(scrollbar.className).toContain('data-[orientation=horizontal]:flex-col')
   })
 
-  test('merges custom className', () => {
+  test('merges custom className', async () => {
     render(
       <ScrollArea>
         <ScrollBar className="custom-scrollbar" data-testid="scrollbar" />
       </ScrollArea>,
     )
-    expect(screen.getByTestId('scrollbar')).toHaveClass('custom-scrollbar')
+    expect(await screen.findByTestId('scrollbar')).toHaveClass('custom-scrollbar')
   })
 
-  test('renders a thumb', () => {
+  test('renders a thumb', async () => {
     render(
       <ScrollArea>
         <ScrollBar data-testid="scrollbar" />
       </ScrollArea>,
     )
-    const thumb = screen.getByTestId('scrollbar').querySelector('[data-slot="scroll-area-thumb"]')
+    const scrollbar = await screen.findByTestId('scrollbar')
+    const thumb = scrollbar.querySelector('[data-slot="scroll-area-thumb"]')
     expect(thumb).toBeInTheDocument()
   })
 })

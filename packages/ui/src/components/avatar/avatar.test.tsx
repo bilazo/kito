@@ -87,7 +87,7 @@ describe('AvatarBadge', () => {
     )
     const badge = screen.getByTestId('badge')
     expect(badge).toHaveAttribute('data-slot', 'avatar-badge')
-    expect(badge).toHaveClass('absolute', 'bottom-0', 'end-0')
+    expect(badge).toHaveClass('absolute', 'bottom-0', 'inset-e-0')
   })
 
   test.each([

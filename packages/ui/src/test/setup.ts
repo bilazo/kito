@@ -15,3 +15,15 @@ class ResizeObserverStub {
 if (globalThis.ResizeObserver === undefined) {
   globalThis.ResizeObserver = ResizeObserverStub as unknown as typeof ResizeObserver
 }
+
+// jsdom does not implement Element.prototype.getAnimations. Base UI calls
+// it from getFiniteAnimations() when checking finite transitions/animations
+// (e.g. ScrollAreaViewport schedules this in a setTimeout). Without the
+// polyfill, the error surfaces as an unhandled rejection and can leave
+// subcomponents un-mounted.
+if (!Element.prototype.getAnimations) {
+  // oxlint-disable-next-line unicorn/consistent-function-scoping
+  Element.prototype.getAnimations = function getAnimations() {
+    return []
+  }
+}

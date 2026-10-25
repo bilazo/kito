@@ -123,7 +123,7 @@ describe('ContextMenuItem', () => {
       <ContextMenu defaultOpen>
         <ContextMenuTrigger>Right-click me</ContextMenuTrigger>
         <ContextMenuPopup>
-          <ContextMenuItem onSelect={onSelect}>Cut</ContextMenuItem>
+          <ContextMenuItem onClick={onSelect}>Cut</ContextMenuItem>
         </ContextMenuPopup>
       </ContextMenu>,
     )
