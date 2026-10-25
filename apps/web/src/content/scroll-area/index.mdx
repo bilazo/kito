@@ -1,0 +1,61 @@
+---
+title: ScrollArea
+description: Augments native scroll functionality for custom, cross-browser styling.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/scroll-area
+  api: https://base-ui.com/react/components/scroll-area#api-reference
+---
+
+Native scrolling — `overflow: auto`, momentum on touch, keyboard scrolling
+— works as usual. ScrollArea adds a **styleable** scrollbar that does not
+depend on the OS-chrome look of `::-webkit-scrollbar`.
+
+## Basic
+
+Give the root a size (`h-…`, `w-…`, or both). The viewport fills it.
+
+<ComponentPreview name="scroll-area/basic" />
+
+## Horizontal
+
+`ScrollArea` renders one vertical scrollbar by default. Add a second one
+for horizontal scrolling:
+
+```tsx
+<ScrollArea className="w-80">
+  {wideContent}
+  <ScrollBar orientation="horizontal" />
+</ScrollArea>
+```
+
+<ComponentPreview name="scroll-area/horizontal" />
+
+## Both axes
+
+Add a horizontal `ScrollBar` alongside the default vertical one for
+bidirectional scrolling — useful for wide tables.
+
+<ComponentPreview name="scroll-area/both-axes" />
+
+## With a list
+
+A common use: a scrollable list of rows that stays a fixed height.
+
+<ComponentPreview name="scroll-area/with-list" />
+
+## RTL
+
+Base UI flips the scroll axis in RTL automatically. The vertical scrollbar
+moves to the inline-end (left in RTL) and horizontal scrolling starts from
+the reading start.
+
+<ComponentPreview name="scroll-area/rtl" />
+
+## Props
+
+<PropsTable name="scroll-area" />
+
+## Guidelines
+
+<Guidelines name="scroll-area" />
