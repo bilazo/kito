@@ -1,0 +1,84 @@
+---
+title: Navigation Menu
+description: A horizontal navigation bar with hoverable dropdowns.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/navigation-menu
+  api: https://base-ui.com/react/components/navigation-menu#api-reference
+---
+
+A single `NavigationMenu` renders one **shared viewport**: when the user
+moves the pointer from one open trigger to another, the panel slides and
+resizes smoothly rather than unmounting and remounting. This is what makes
+it feel like a single menu rather than a set of independent popovers.
+
+## Basic
+
+<ComponentPreview name="navigation-menu/basic" />
+
+## Composition
+
+```text
+NavigationMenu
+└── NavigationMenuList
+    ├── NavigationMenuItem
+    │   ├── NavigationMenuTrigger
+    │   └── NavigationMenuContent
+    │       └── NavigationMenuLink
+    └── NavigationMenuItem
+        └── NavigationMenuLink
+```
+
+`NavigationMenuLink` works in two positions:
+
+- Inside `NavigationMenuContent` — a row within a dropdown panel.
+- Directly inside `NavigationMenuItem` — a standalone top-level nav item.
+
+## Multiple menus
+
+<ComponentPreview name="navigation-menu/two-menus" />
+
+## With icons
+
+<ComponentPreview name="navigation-menu/with-icons" />
+
+## Trigger style
+
+When you have a nav item that is a link rather than a trigger, use
+`navigationMenuTriggerStyle()` to make it look identical. This is the
+recommended way to integrate with any router:
+
+```tsx
+import { Link } from '@tanstack/react-router'
+import { navigationMenuTriggerStyle } from '@bilazo/kito/components/navigation-menu'
+
+;<Link to="/docs" className={navigationMenuTriggerStyle()}>
+  Documentation
+</Link>
+```
+
+<ComponentPreview name="navigation-menu/trigger-style" />
+
+## RTL
+
+Every part uses logical properties (`ms-1`, `ps-*`) and flex layout, so
+`NavigationMenu` flips automatically in RTL. The chevron rotates 180° when
+the panel is open — the rotation is direction-agnostic (a 180° turn of a
+down-chevron is an up-chevron), so no `rtl:-scale-x-100` is needed.
+
+**Portal gotcha:** the positioner is portaled to `document.body`. Base UI’s
+`Positioner` computes `align` from the `DirectionProvider` context, not from
+the DOM — so in a real Persian app, mount `<DirectionProvider
+direction="rtl">` once near the app root (the same place `TooltipProvider`
+goes). Without it, `align="start"` aligns at the physical left in both
+directions.
+
+<ComponentPreview name="navigation-menu/rtl" />
+
+## Props
+
+<PropsTable name="navigation-menu" />
+
+## Guidelines
+
+<Guidelines name="navigation-menu" />
