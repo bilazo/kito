@@ -26,7 +26,7 @@ export default function Rtl() {
           <TooltipTrigger render={<Button size="icon" aria-label="ذخیره" />}>
             <Save />
           </TooltipTrigger>
-          <TooltipContent>
+          <TooltipContent dir="rtl">
             ذخیره <Kbd className="text-[10px]">⌘S</Kbd>
           </TooltipContent>
         </Tooltip>

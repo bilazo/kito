@@ -81,7 +81,7 @@ export function ComponentPreview({ name, lang = 'tsx' }: ComponentPreviewProps) 
           </Button>
         )}
 
-        <Button
+        {/* <Button
           variant={dark ? 'soft' : 'ghost'}
           size="icon-sm"
           aria-label={dark ? 'Light preview' : 'Dark preview'}
@@ -90,7 +90,7 @@ export function ComponentPreview({ name, lang = 'tsx' }: ComponentPreviewProps) 
           onClick={() => setDark((v) => !v)}
         >
           {dark ? <Sun /> : <Moon />}
-        </Button>
+        </Button> */}
       </div>
 
       {/* Preview */}

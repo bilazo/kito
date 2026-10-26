@@ -16,12 +16,12 @@ export type TooltipProviderProps = BaseTooltip.Provider.Props
 /**
  * Shares hover timings across all tooltips in its subtree.
  *
- * Wrap the app once — typically in the root layout — so that a 400 ms hover
+ * Wrap the app once — typically in the root layout — so that a 100 ms hover
  * on one tooltip does not reset the delay for the next tooltip the user
  * hovers. Without a Provider, Base UI uses its own default delay, which is
  * longer and not adjustable from individual tooltips.
  */
-export function TooltipProvider({ delay = 400, ...props }: TooltipProviderProps) {
+export function TooltipProvider({ delay = 100, ...props }: TooltipProviderProps) {
   return <BaseTooltip.Provider data-slot="tooltip-provider" delay={delay} {...props} />
 }
 
@@ -145,12 +145,37 @@ export function TooltipContent({
           data-slot="tooltip-content"
           role="tooltip"
           className={cn(
+            // Base
             'max-w-xs gap-1.5 z-50 inline-flex w-fit items-center',
             'px-3 py-1.5 rounded-md bg-foreground text-xs text-background',
+            // Grow from the positioner's anchor on enter; shrink back on exit.
             'origin-(--transform-origin)',
-            'transition-[transform,opacity] duration-150 motion-reduce:transition-none',
-            'data-starting-style:scale-95 data-starting-style:opacity-0',
-            'data-ending-style:scale-95 data-ending-style:opacity-0',
+
+            // ── Kbd slot ──────────────────────────────────────────────
+            // When a Kbd is inside, drop the end padding so the Kbd sits
+            // closer to the tooltip edge — the keycap is small, and the
+            // default `px-3` looks heavy next to it.
+            'has-data-[slot=kbd]:pe-1.5',
+
+            // ── Directional slide-in ──────────────────────────────────
+            // The tooltip slides in from the edge opposite to where it
+            // appears — a bottom tooltip slides down from the top. Only
+            // physical sides; `inline-start` / `inline-end` were removed
+            // from the Kito API.
+            'data-[side=bottom]:slide-in-from-top-2',
+            'data-[side=top]:slide-in-from-bottom-2',
+            'data-[side=left]:slide-in-from-right-2',
+            'data-[side=right]:slide-in-from-left-2',
+
+            // ── Enter / exit ──────────────────────────────────────────
+            // `tw-animate-css` utilities. `data-open` / `data-closed` come
+            // from Base UI. `fade-in-0` / `zoom-in-95` set the CSS variables
+            // that `animate-in` reads. `motion-reduce:animate-none` strips
+            // the animation for users who opted out.
+            'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
+            'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+            'motion-reduce:animate-none',
+
             className,
           )}
           {...props}
