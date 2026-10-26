@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter @bilazo/kito build && pnpm --filter @bilazo/kito-web dev",
-    "build": "pnpm test && pnpm --filter @bilazo/kito build && pnpm --filter @bilazo/kito-web build",
+    "build": "pnpm test && pnpm --filter @bilazo/kito build && pnpm --filter @bilazo/kito-web build && pnpm gen:ai",
     "new": "tsx scripts/new-component.ts",
     "gen:ai": "tsx scripts/gen-ai-docs.ts",
     "lint": "pnpm -r lint",
