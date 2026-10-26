@@ -1,6 +1,6 @@
 {
   "name": "@bilazo/kito",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A React design system built on Base UI and Tailwind CSS v4.",
   "keywords": [
     "base-ui",
