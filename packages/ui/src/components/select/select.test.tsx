@@ -239,7 +239,7 @@ describe('SelectPopup', () => {
     renderSelect()
     const trigger = screen.getByRole('combobox')
     await userEvent.click(trigger)
-    const listbox = screen.getByRole('listbox')
+    const listbox = await screen.findByRole('listbox')
     expect(trigger.contains(listbox)).toBe(false)
   })
 
