@@ -1,0 +1,46 @@
+# Kito
+
+> A React design system built on Base UI and Tailwind CSS v4. Framework-agnostic.
+
+Complete documentation is also available as a single file at
+[llms-full.txt](./llms-full.txt).
+
+## Components
+- [Accordion](./ai/components/accordion.md): A vertically stacked set of interactive headings that each reveal a section of content.
+- [Alert](./ai/components/alert.md): A callout for user attention.
+- [Aspect Ratio](./ai/components/aspect-ratio.md): Constrains its child to a fixed aspect ratio.
+- [Avatar](./ai/components/avatar.md): A profile image with an automatic fallback and optional status.
+- [Badge](./ai/components/badge.md): A compact status or label chip.
+- [Button](./ai/components/button.md): A pressable action element.
+- [Button Group](./ai/components/button-group.md): A container that groups related buttons together with consistent styling.
+- [Card](./ai/components/card.md): A structural surface for grouping related content.
+- [Checkbox](./ai/components/checkbox.md): A checkbox with checked, unchecked, and indeterminate states.
+- [Combobox](./ai/components/combobox.md): A searchable dropdown — a text input that filters a list as you type.
+- [Context Menu](./ai/components/context-menu.md): A menu of actions triggered by right-click.
+- [Dialog](./ai/components/dialog.md): A centered modal for a focused task.
+- [Direction](./ai/components/direction.md): Sets the text direction (LTR or RTL) for a subtree.
+- [Drawer](./ai/components/drawer.md): A swipeable sheet anchored to one edge of the viewport.
+- [Field](./ai/components/field.md): A single form field wired for accessibility — label, control, description, and error.
+- [Input](./ai/components/input.md): A single-line text field for forms and inline text entry.
+- [Input Group](./ai/components/input-group.md): A single visually-merged control — an input plus icon, text, or button slots.
+- [Input OTP](./ai/components/input-otp.md): A one-time-password input composed of individual character slots.
+- [Item](./ai/components/item.md): A flexible container for one row of content — media, title, description, and actions.
+- [Kbd](./ai/components/kbd.md): Renders a single keyboard key or a short sequence like ⌘K.
+- [Label](./ai/components/label.md): An accessible form control label.
+- [Menu](./ai/components/menu.md): A dropdown menu of commands or links.
+- [Navigation Menu](./ai/components/navigation-menu.md): A horizontal navigation bar with hoverable dropdowns.
+- [Popover](./ai/components/popover.md): A panel anchored to a trigger, opened by click.
+- [Progress](./ai/components/progress.md): A linear progress bar for completion and measurable processes.
+- [Radio](./ai/components/radio.md): A group of mutually-exclusive options.
+- [ScrollArea](./ai/components/scroll-area.md): Augments native scroll functionality for custom, cross-browser styling.
+- [Select](./ai/components/select.md): A dropdown for choosing one option from a list.
+- [Separator](./ai/components/separator.md): A thin line used to visually separate groups of content.
+- [Sheet](./ai/components/sheet.md): A slide-in panel anchored to one edge of the viewport.
+- [Skeleton](./ai/components/skeleton.md): A loading placeholder.
+- [Slider](./ai/components/slider.md): A control for selecting a value from a range.
+- [Switch](./ai/components/switch.md): A binary on/off toggle for a setting that takes effect immediately.
+- [Table](./ai/components/table.md): A data table. Plain semantic HTML — no sorting, pagination, or selection logic.
+- [Tabs](./ai/components/tabs.md): A set of layered panels switched by a row (or column) of tabs.
+- [Textarea](./ai/components/textarea.md): A multi-line text input.
+- [Toast](./ai/components/toast.md): A brief notification that appears at a corner of the viewport.
+- [Tooltip](./ai/components/tooltip.md): A small label that appears on hover or focus of a trigger.
