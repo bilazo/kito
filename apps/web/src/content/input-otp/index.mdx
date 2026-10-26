@@ -1,0 +1,102 @@
+---
+title: Input OTP
+description: A one-time-password input composed of individual character slots.
+category: Components
+links:
+  doc: https://base-ui.com/react/components/otp-field
+  api: https://base-ui.com/react/components/otp-field#api-reference
+---
+
+`InputOTP` renders a one-time-password input as a row of character slots.
+Built on Base UI's `OTPField` — each slot is a **real `<input>`**, so focus
+moves between them natively, the browser's caret is the real caret, and
+paste/autofill across slots is handled by the primitive.
+
+Give the root a `length` (required) and either let it auto-render the slots
+or compose them manually with `InputOTPGroup` / `InputOTPSeparator`.
+
+## Basic
+
+The simplest form — `InputOTP` auto-renders `length` slots in a single row.
+
+<ComponentPreview name="input-otp/basic" />
+
+## Sizes
+
+`sm`, `md`, and `lg` map to the same `--control-*` tokens that `Button` uses.
+
+<ComponentPreview name="input-otp/sizes" />
+
+## With a separator
+
+`InputOTPGroup count` auto-renders a subset of slots. Put an
+`InputOTPSeparator` between groups for the `123-456` presentation. The
+separator is `aria-hidden` — the OTP slots already carry their own position
+labels, so a dash between groups is purely visual.
+
+<ComponentPreview name="input-otp/with-separator" />
+
+## Validation types
+
+`validationType` restricts accepted characters: `numeric` (default),
+`alpha`, `alphanumeric`, or `none`. Pairs naturally with a PIN (`numeric`)
+or a recovery code (`alphanumeric`).
+
+<ComponentPreview name="input-otp/four-digits" />
+
+<ComponentPreview name="input-otp/alphanumeric" />
+
+## Controlled
+
+Pass `value` and `onValueChange` to drive the value from outside.
+
+<ComponentPreview name="input-otp/controlled" />
+
+## Disabled
+
+<ComponentPreview name="input-otp/disabled" />
+
+## Invalid
+
+Pass `aria-invalid` on **each slot** — it does not cascade from the root or
+the group. When the input lives inside a `<Field invalid>`, Base UI sets
+`data-invalid` automatically and the slot's `data-invalid:` styles apply
+without any extra prop.
+
+<ComponentPreview name="input-otp/invalid" />
+
+## In a form
+
+Wrap the OTP in a `Field` for a labelled input, and pass `id` on
+`InputOTP` so the label targets the first slot. Base UI auto-advances
+focus as the user types, and can submit the form on completion via
+`autoSubmit`.
+
+<ComponentPreview name="input-otp/form" />
+
+## Accessibility
+
+- Wrap the OTP in a `Field` with a label, or use an `id` on `InputOTP`
+  with an adjacent `<label htmlFor>`. Auto-rendered slots add
+  `aria-label="Character N of L"` so screen readers can announce the
+  focused position; slot 0 inherits the field's label.
+- If you compose slots manually, add `aria-label` to each slot yourself.
+- `autoSubmit` submits the owning form when all slots are filled. Pair with
+  `onValueComplete` to react without submitting.
+
+## RTL
+
+`InputOTP` is not portaled — it renders inline, so `dir` inherits from
+`<html dir>` or any wrapper. The slots sit in a `flex` row, which reverses
+in RTL — the first character appears at the right. No per-component
+override is needed.
+
+<ComponentPreview name="input-otp/rtl" />
+
+## Props
+
+<PropsTable name="input-otp" />
+
+## Guidelines
+
+<Guidelines name="input-otp" />
