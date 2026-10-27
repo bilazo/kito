@@ -21,13 +21,13 @@
     "check": "pnpm test && pnpm typecheck && pnpm format:check && pnpm lint"
   },
   "devDependencies": {
-    "@bilazo/oxc-config": "^1.0.1",
+    "@bilazo/oxc-config": "catalog:",
     "@changesets/cli": "2.31.1",
-    "@types/node": "^26.6.4",
-    "oxfmt": "^0.72.0",
-    "oxlint": "^1.87.0",
+    "@types/node": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "tsx": "^4.23.15",
-    "typescript": "~5.9.3"
+    "typescript": "catalog:"
   },
   "engines": {
     "node": ">=24"
